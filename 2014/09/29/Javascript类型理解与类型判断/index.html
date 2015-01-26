@@ -1,0 +1,407 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Javascript类型理解与类型判断 | 特首的前端日志</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="特首">
+    
+    <meta name="description" content="前言
+理解Javascript的类型是学习Javascript的基础，但是作为新手很容易在判断Javascript上容易混淆，所以在此整理清自己的思路。
+类型
+
+JavaScript 中所有变量都是对象，除了两个例外 null 和 undefined。
+
+作为新手很容易被上面这句话误导，首先解释下上">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="特首的前端日志" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/icon.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/icon.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/rocket.jpg" alt="特首的前端日志" title="特首的前端日志"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="特首的前端日志">特首的前端日志</a></h1>
+				<h2 class="blog-motto">我不是大神，可我是要成为大神的男人</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/09/29/Javascript类型理解与类型判断/" title="Javascript类型理解与类型判断" itemprop="url">Javascript类型理解与类型判断</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="特首">特首</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-09-29T05:34:38.000Z" itemprop="datePublished">9月 29 2014</time>
+    更新日期:<time datetime="2014-11-02T12:00:05.000Z" itemprop="dateModified">11月 2 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<h2 id="前言">前言</h2>
+<p>理解Javascript的类型是学习Javascript的基础，但是作为新手很容易在判断Javascript上容易混淆，所以在此整理清自己的思路。</p>
+<h2 id="类型">类型</h2>
+<blockquote>
+<p>JavaScript 中所有变量都是对象，除了两个例外 null 和 undefined。</p>
+</blockquote>
+<p>作为新手很容易被上面这句话误导，首先解释下上面这句话。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="literal">false</span>.toString(); <span class="comment">// 'false'</span></div><div class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].toString(); <span class="comment">// '1,2,3'</span></div><div class="line">(<span class="number">2</span>).toString(); <span class="comment">// '2'</span></div></pre></td></tr></table></figure>
+
+<p>通过上面的代码，可以看出布尔、数组、数字都具有<code>toString()</code>这一方法，其实除了<code>null</code>和<code>undefined</code>外的数据类型都继承自<code>Object</code>对象都具<code>Object</code>的方法和属性，这些看似非对象的类型使用起来却很像对象，所以也可以说它们都是对象。可是Javascript依然具有类型，我想大致可以分成下面几类：</p>
+<ul>
+<li>Number</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Object</li>
+<li>Null</li>
+<li>Undefined</li>
+</ul>
+<p><code>Number</code>、<code>String</code>、<code>Boolean</code>、<code>Null</code>、<code>Undefined</code>都是是基本数据类型，只有<code>Object</code>属于复杂数据类型。<code>Null</code>和<code>Undefined</code>都表示空，它们的区别在于：<code>Null</code>表示无值，一般是人为的将变量的值设置为<code>null</code>；<code>Undefined</code>表示未知值，一般在使用var声明变量但未对其加以初始化时，这个变量值为<code>undefined</code>。</p>
+<p><code>Object</code>又分为以下几种类型：</p>
+<ul>
+<li>Object<ul>
+<li>Function</li>
+<li>Array</li>
+<li>Date</li>
+<li>RegExp</li>
+</ul>
+</li>
+</ul>
+<h2 id="typeof操作符">typeof操作符</h2>
+<p><code>typeof</code>操作符（和<code>instanceof</code>一起）或许是 JavaScript 中最大的设计缺陷， 因为几乎不可能从它们那里得到想要的结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span> []; <span class="comment">// object</span></div><div class="line"><span class="keyword">typeof</span> {}; <span class="comment">// object</span></div><div class="line"><span class="keyword">typeof</span> <span class="string">''</span>; <span class="comment">// string</span></div><div class="line"><span class="keyword">typeof</span> <span class="keyword">new</span> <span class="built_in">Date</span>() <span class="comment">// object</span></div><div class="line"><span class="keyword">typeof</span> <span class="number">1</span>; <span class="comment">// number</span></div><div class="line"><span class="keyword">typeof</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{}; <span class="comment">// function</span></div><div class="line"><span class="keyword">typeof</span> /test/i; <span class="comment">// object</span></div><div class="line"><span class="keyword">typeof</span> <span class="literal">true</span>; <span class="comment">// boolean</span></div><div class="line"><span class="keyword">typeof</span> <span class="literal">null</span>; <span class="comment">// object</span></div><div class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span>; <span class="comment">// undefined</span></div></pre></td></tr></table></figure>
+
+<p>为什么？<code>function</code>明明是<code>Object</code>类型，却显示<code>function</code>；<code>null</code>明明是<code>Null</code>类型，却显示’object’。所以<code>typeof</code>操作符对类型的判断是不靠谱的，除非类型在给定的范围且<code>typeof</code>确实能够区分这些类型。</p>
+<h2 id="类型的区分">类型的区分</h2>
+<p>Javascript标准标准文档给出了区分类型的办法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.prototype.toString.call();</div></pre></td></tr></table></figure>
+
+<p>我们来看看上面的方法效果如何：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.prototype.toString.call([]); <span class="comment">// [object Array]</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call({}); <span class="comment">// [object Object]</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="string">''</span>); <span class="comment">// [object String]</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">new</span> <span class="built_in">Date</span>()); <span class="comment">// [object Date]</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="number">1</span>); <span class="comment">// [object Number]</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{}); <span class="comment">// [object Function]</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="regexp">/test/i</span>); <span class="comment">// [object RegExp]</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">true</span>); <span class="comment">// [object Boolean]</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>); <span class="comment">// [object Null]</span></div><div class="line"><span class="built_in">Object</span>.prototype.toString.call(); <span class="comment">// [object Undefined]</span></div></pre></td></tr></table></figure>
+
+<p>效果确实比<code>typeof</code>操作符号不一样，那我们在判断的时候就可以这么使用了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getType = <span class="function"><span class="keyword">function</span> <span class="params">(elem)</span> </span>{</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(elem);</div><div class="line">    },</div><div class="line">    person = {};</div><div class="line">    person.getName = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">return</span> <span class="string">'Jason'</span>;</div><div class="line">    };</div><div class="line"><span class="keyword">if</span> (getType(person) === <span class="string">'[object Object]'</span>) {</div><div class="line">  person.getName();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>可是这样还不够完美，因为<code>Object.prototype.toString.call()</code>返回值是字符串所以可以用<code>.slice(8, -1)</code>方法去掉<code>[object</code>和<code>]</code>。所以我们再改进一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> getType = <span class="function"><span class="keyword">function</span> <span class="params">(elem)</span> </span>{</div><div class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(elem).slice(<span class="number">8</span>, -<span class="number">1</span>);</div><div class="line">    },</div><div class="line">    person = {};</div><div class="line">    person.getName = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">      <span class="keyword">return</span> <span class="string">'Jason'</span>;</div><div class="line">    };</div><div class="line"><span class="keyword">if</span> (getType(person) === <span class="string">'Object'</span>) {</div><div class="line">  person.getName();</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="写个类库">写个类库</h2>
+<p>利用上面判断类型的方法可以写个类库，此类库来自(Axis.js)[//github.com/toddmotto/axis]:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> <span class="params">(root, factory)</span> </span>{</div><div class="line">  <span class="comment">// 判断是否使用了模块</span></div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> && define.amd) {</div><div class="line">    <span class="comment">// 使用AMD模块</span></div><div class="line">    define(factory);</div><div class="line">  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> exports === <span class="string">'object'</span>) {</div><div class="line">    <span class="comment">// 使用CMD模块</span></div><div class="line">    <span class="built_in">module</span>.exports = factory;</div><div class="line">  } <span class="keyword">else</span> {</div><div class="line">    <span class="comment">// 没有使用模块，放在全局下</span></div><div class="line">    root.axis = factory();</div><div class="line">  }</div><div class="line">})(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">  <span class="comment">// 严格模式</span></div><div class="line"><span class="pi">  'use strict'</span>;</div><div class="line">  <span class="keyword">var</span> exports = {};</div><div class="line">  <span class="comment">// 将字符串转为数组</span></div><div class="line">  <span class="keyword">var</span> types = <span class="string">'Array Object String Date RegExp Function Boolean Number Null Undefined'</span>.split(<span class="string">' '</span>);</div><div class="line">  <span class="comment">// 判断类型</span></div><div class="line">  <span class="keyword">var</span> type = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">this</span>).slice(<span class="number">8</span>, -<span class="number">1</span>);</div><div class="line">  };</div><div class="line">  <span class="comment">// 遍历types，为exports对象添加isArray、isObject...等方法</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = types.length; i--;) {</div><div class="line">    exports[<span class="string">'is'</span> + types[i]] = (<span class="function"><span class="keyword">function</span> <span class="params">(self)</span> </span>{</div><div class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="params">(elem)</span> </span>{</div><div class="line">        <span class="comment">// type.call(elem)将type方法里的this指针指向elem</span></div><div class="line">        <span class="keyword">return</span> type.call(elem) === self;</div><div class="line">      };</div><div class="line">    })(types[i]);</div><div class="line">  }</div><div class="line">  <span class="keyword">return</span> exports;</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>使用方法也很简单：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">axis.isArray([]); <span class="comment">// true</span></div><div class="line">axis.isObject({}); <span class="comment">// true</span></div><div class="line">axis.isString(<span class="string">''</span>); <span class="comment">// true</span></div><div class="line">axis.isDate(<span class="keyword">new</span> <span class="built_in">Date</span>()); <span class="comment">// true</span></div><div class="line">axis.isRegExp(<span class="regexp">/test/i</span>); <span class="comment">// true</span></div><div class="line">axis.isFunction(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{}); <span class="comment">// true</span></div><div class="line">axis.isBoolean(<span class="literal">true</span>); <span class="comment">// true</span></div><div class="line">axis.isNumber(<span class="number">1</span>); <span class="comment">// true</span></div><div class="line">axis.isNull(<span class="literal">null</span>); <span class="comment">// true</span></div><div class="line">axis.isUndefined(); <span class="comment">// true</span></div></pre></td></tr></table></figure>
+
+<blockquote>
+<p> 参考链接：</p>
+<ul>
+<li><a href="http://toddmotto.com/understanding-javascript-types-and-reliable-type-checking/" target="_blank" rel="external">http://toddmotto.com/understanding-javascript-types-and-reliable-type-checking/</a></li>
+<li><a href="http://bonsaiden.github.io/JavaScript-Garden/" target="_blank" rel="external">http://bonsaiden.github.io/JavaScript-Garden/</a></li>
+</ul>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Javascript/">Javascript</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2014/09/29/Javascript类型理解与类型判断/" data-title="Javascript类型理解与类型判断 | 特首的前端日志" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/10/29/NodeJs教程/" title="NodeJs教程">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  NodeJs教程</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/09/23/清除浮动的几种实现方式/"  title="清除浮动的几种实现方式">
+ <strong>NEXT:</strong><br/> 
+ <span>清除浮动的几种实现方式
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型"><span class="toc-number">2.</span> <span class="toc-text">类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typeof操作符"><span class="toc-number">3.</span> <span class="toc-text">typeof操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型的区分"><span class="toc-number">4.</span> <span class="toc-text">类型的区分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写个类库"><span class="toc-number">5.</span> <span class="toc-text">写个类库</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Gulp/" title="Gulp">Gulp<sup>1</sup></a></li>
+		
+			<li><a href="/tags/IOS/" title="IOS">IOS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Javascript/" title="Javascript">Javascript<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Jason <br/>
+			My blog will update monthly</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1164450580" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/markpop" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="特首">特首</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"markpop"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-54795545-2', 'auto');  
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

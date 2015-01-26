@@ -1,0 +1,538 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Swift学习笔记 | 特首的前端日志</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="特首">
+    
+    <meta name="description" content="基础部分
+常量与变量
+
+let（常量）
+var（变量）
+
+123var x = 0.0, y = 0.0, z = 0.0 // 一行声明多个变量var msg: String // 标注类型println(&quot;my name is \(name)&quot;) // 字符串插值
+
+注释
+
+单行注释
+多行注释
+">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="特首的前端日志" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/icon.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/icon.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/rocket.jpg" alt="特首的前端日志" title="特首的前端日志"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="特首的前端日志">特首的前端日志</a></h1>
+				<h2 class="blog-motto">我不是大神，可我是要成为大神的男人</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/01/26/Swift学习笔记/" title="Swift学习笔记" itemprop="url">Swift学习笔记</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="特首">特首</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-01-26T14:55:23.000Z" itemprop="datePublished">1月 26 2015</time>
+    更新日期:<time datetime="2015-01-26T14:57:33.000Z" itemprop="dateModified">1月 26 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<h1 id="基础部分">基础部分</h1>
+<h2 id="常量与变量">常量与变量</h2>
+<ul>
+<li>let（常量）</li>
+<li>var（变量）</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">0.0</span>, y = <span class="number">0.0</span>, z = <span class="number">0.0</span> <span class="comment">// 一行声明多个变量</span></div><div class="line"><span class="keyword">var</span> msg: <span class="type">String</span> <span class="comment">// 标注类型</span></div><div class="line"><span class="built_in">println</span>(<span class="string">"my name is <span class="subst">\(name)</span>"</span>) <span class="comment">// 字符串插值</span></div></pre></td></tr></table></figure>
+
+<h2 id="注释">注释</h2>
+<ul>
+<li>单行注释</li>
+<li>多行注释</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这是一个注释</span></div><div class="line"><span class="comment">/* 这是一个</span></div><div class="line">多行注释 */</div></pre></td></tr></table></figure>
+
+<h2 id="数据类型">数据类型</h2>
+<ul>
+<li>整型<ul>
+<li>Int（有符号，32位平台为Int32，64位平台为Int64）<ul>
+<li>Int8</li>
+<li>Int16</li>
+<li>Int32</li>
+<li>Int64</li>
+</ul>
+</li>
+<li>UInt（无符号，32位平台为UInt32，64位平台为UInt64）<ul>
+<li>UInt8</li>
+<li>UInt16</li>
+<li>UInt32</li>
+<li>UInt64</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>浮点型<ul>
+<li>Double（64位，15位数字）</li>
+<li>Float（32位，6位数字）</li>
+</ul>
+</li>
+<li>布尔型<ul>
+<li>true</li>
+<li>false</li>
+</ul>
+</li>
+<li>元组</li>
+<li>nil</li>
+</ul>
+<h3 id="整数">整数</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> minValue = <span class="type">UInt8</span>.<span class="built_in">min</span> <span class="comment">// minValue为0</span></div><div class="line"><span class="keyword">let</span> maxValue = <span class="type">UInt8</span>.<span class="built_in">max</span> <span class="comment">// maxValue为255</span></div></pre></td></tr></table></figure>
+
+<h3 id="浮点型">浮点型</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> pi = <span class="number">3.14159</span> <span class="comment">// pi会被推测为Double类型</span></div></pre></td></tr></table></figure>
+
+<h3 id="元组">元组</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">let http404Error = (<span class="number">404</span>, <span class="string">"Not Found"</span>)</div><div class="line">let (statusCode, statusMessage) = http404Error</div><div class="line">println(statusCode<span class="string">") // 404</span></div><div class="line">println(statusMessage) <span class="comment">// Not Found</span></div><div class="line"><span class="comment">// 只需一部分，用下划线（_）代替</span></div><div class="line">let (justTheStatusCode, _) = http404Error</div><div class="line"><span class="comment">// 访问单个元素</span></div><div class="line">println(http404Error.<span class="number">0</span>) <span class="comment">// 404</span></div><div class="line">println(http404Error.<span class="number">1</span>) <span class="comment">// Not Found</span></div><div class="line"><span class="comment">// 给单个元素命名</span></div><div class="line">let http200Status = (statusCode: <span class="number">200</span>, description: <span class="string">"OK"</span>)</div><div class="line">println(http200Status.statusCode) <span class="comment">// 200</span></div><div class="line">println(http200Status.description) <span class="comment">// OK</span></div></pre></td></tr></table></figure>
+
+<h3 id="数值型字面量">数值型字面量</h3>
+<ul>
+<li>十进制（没有前缀）</li>
+<li>二进制（0b）</li>
+<li>八进制（0o）</li>
+<li>十六进制（0x）</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.25e2</span> <span class="comment">// 表示1.25x10^2</span></div><div class="line"><span class="number">1.25e-2</span> <span class="comment">// 表示1.25x10^-2</span></div><div class="line"><span class="number">0xF</span>p2 <span class="comment">// 表示15x2^2</span></div><div class="line"><span class="number">0xF</span>p-<span class="number">2</span> <span class="comment">// 表示15x2^-2</span></div><div class="line">lef oneMillion = <span class="number">1</span>_000_000 <span class="comment">// 整数和浮点数都可以加_来增强可读性</span></div></pre></td></tr></table></figure>
+
+<h3 id="数值类型转化">数值类型转化</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// 整型转化</div><div class="line"><span class="keyword">let</span> one: <span class="variable">UInt8 =</span> <span class="number">1</span></div><div class="line"><span class="keyword">let</span> two: <span class="variable">UInt16 =</span> UInt16(one)</div><div class="line">// 整型转浮点型</div><div class="line">lef <span class="variable">i =</span> <span class="number">3</span></div><div class="line"><span class="keyword">let</span> <span class="variable">d =</span> Double(i)</div><div class="line">// 浮点型转整型</div><div class="line"><span class="keyword">let</span> <span class="variable">pi =</span> <span class="number">3.14</span></div><div class="line"><span class="keyword">let</span> <span class="variable">three =</span> Int(pi) // 浮点值会被截断</div></pre></td></tr></table></figure>
+
+<h3 id="类型别名">类型别名</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typealias</span> <span class="type">AudioSample</span> = <span class="type">UInt16</span></div><div class="line"><span class="keyword">var</span> <span class="built_in">min</span> = <span class="type">AudioSample</span>.<span class="built_in">min</span> <span class="comment">// min为0</span></div></pre></td></tr></table></figure>
+
+<h3 id="可选类型">可选类型</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// option为可选类型</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">const</span> = option {</div><div class="line">  <span class="comment">// code</span></div><div class="line">}</div><div class="line"><span class="comment">// 可选（?）和隐式可选（!）的区别</span></div><div class="line"><span class="keyword">let</span> h: <span class="built_in">String</span>? = <span class="string">"hello"</span></div><div class="line">println(h!)</div><div class="line"><span class="keyword">let</span> w: <span class="built_in">String</span>! = <span class="string">"world"</span></div><div class="line">print(w)</div></pre></td></tr></table></figure>
+
+<h2 id="调试">调试</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="variable">age =</span> -<span class="number">3</span></div><div class="line"><span class="keyword">assert</span>(age &gt;= <span class="number">0</span>, <span class="string">"cannot be less than zero"</span>) // 条件为<span class="constant">false</span>程序终止</div></pre></td></tr></table></figure>
+
+<h1 id="基本运算符">基本运算符</h1>
+<ul>
+<li>赋值运算（=）</li>
+<li>算数运算<ul>
+<li>加法（+）</li>
+<li>减法（-）</li>
+<li>乘法（*）</li>
+<li>除法（/）</li>
+<li>求余（%）</li>
+</ul>
+</li>
+<li>自增和自减运算<ul>
+<li>自增（++）</li>
+<li>自减（—）</li>
+</ul>
+</li>
+<li>复合赋值（+=）</li>
+<li>比较运算<ul>
+<li>等于（==）</li>
+<li>不等（!=）</li>
+<li>大于（&gt;）</li>
+<li>小于（&lt;）</li>
+<li>大于等于（&gt;=）</li>
+<li>小于等于（&lt;=）</li>
+</ul>
+</li>
+<li>三目运算（bool?a:b）</li>
+<li>空合运算（a??b）</li>
+<li>区间运算<ul>
+<li>闭区间（…）</li>
+<li>半开区间（..&lt;）</li>
+</ul>
+</li>
+<li>逻辑运算<ul>
+<li>逻辑非（!a）</li>
+<li>逻辑与（a&amp;&amp;b）</li>
+<li>逻辑或（a||b）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 赋值</span></div><div class="line"><span class="keyword">let</span> (x, y) = (<span class="number">1</span>, <span class="number">2</span>)</div><div class="line"><span class="comment">// 求余</span></div><div class="line"><span class="number">8</span> % <span class="number">2.5</span> <span class="comment">// 等于0.5</span></div><div class="line"><span class="comment">// 空合运算</span></div><div class="line"><span class="keyword">var</span> b = <span class="built_in">nil</span></div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span> = <span class="string">"not nil"</span></div><div class="line"><span class="keyword">var</span> a = b ?? <span class="built_in">c</span> <span class="comment">// not nil</span></div><div class="line"><span class="comment">// 闭区间</span></div><div class="line"><span class="keyword">for</span> index <span class="keyword">in</span> <span class="number">1</span>...<span class="number">5</span> {</div><div class="line">  <span class="built_in">println</span>(index) <span class="comment">// index为1~5</span></div><div class="line">} </div><div class="line"><span class="comment">// 半开区间</span></div><div class="line"><span class="keyword">for</span> index <span class="keyword">in</span> <span class="number">0</span>..&lt;<span class="number">4</span> {</div><div class="line">  <span class="built_in">print</span>(index) <span class="comment">// index为0~3</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h1 id="字符串和字符">字符串和字符</h1>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 字面量</span></div><div class="line"><span class="keyword">let</span> dollarSign: <span class="type">Character</span> = <span class="string">"\u{24}"</span></div><div class="line"><span class="comment">// 初始化空字符串</span></div><div class="line"><span class="keyword">var</span> empty = <span class="string">""</span></div><div class="line"><span class="keyword">var</span> anotherEmpty = <span class="type">String</span>()</div><div class="line"><span class="comment">// 判断是否为空</span></div><div class="line"><span class="keyword">if</span> empty.isEmpty {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"empty"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 遍历字符串</span></div><div class="line"><span class="keyword">for</span> character <span class="keyword">in</span> <span class="string">"Dog"</span> {</div><div class="line">  <span class="built_in">print</span>(character)</div><div class="line">}</div><div class="line"><span class="comment">// 字符数</span></div><div class="line"><span class="keyword">let</span> str = <span class="string">"hello"</span></div><div class="line"><span class="built_in">println</span>(<span class="built_in">countElements</span>(str)) <span class="comment">// 5</span></div><div class="line"><span class="comment">// 字符串插值</span></div><div class="line"><span class="keyword">let</span> greeting = <span class="string">"hello"</span></div><div class="line"><span class="keyword">let</span> msg = <span class="string">"<span class="subst">\(greeting)</span> world"</span></div><div class="line"><span class="comment">// 字符串相等</span></div><div class="line"><span class="keyword">let</span> a = <span class="string">"hello world"</span></div><div class="line"><span class="keyword">let</span> b = <span class="string">"hello world"</span></div><div class="line"><span class="keyword">if</span> a == b {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"the same"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 前缀后缀</span></div><div class="line"><span class="keyword">let</span> str = <span class="string">"prefix and suffix"</span></div><div class="line"><span class="built_in">println</span>(str.hasPrefix(<span class="string">"prefix"</span>)) <span class="comment">// true</span></div><div class="line"><span class="built_in">println</span>(str.hasSuffix(<span class="string">"suffix"</span>)) <span class="comment">// true</span></div><div class="line"><span class="comment">// 大写小写</span></div><div class="line"><span class="keyword">let</span> str = <span class="string">"hello world"</span></div><div class="line"><span class="keyword">let</span> upperCase = str.uppercaseString <span class="comment">// HELLO WORLD</span></div><div class="line"><span class="keyword">let</span> lowerCase = upperCase.lowercaseString <span class="comment">// hello world</span></div><div class="line"><span class="comment">// Unicode</span></div><div class="line"><span class="keyword">let</span> dogString = <span class="string">"Dog!🐶"</span></div><div class="line"><span class="keyword">for</span> codeUnit <span class="keyword">in</span> dogString.utf8 {</div><div class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(codeUnit)</span> "</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 68 111 103 33 240 159 144 182</span></div><div class="line"><span class="keyword">for</span> codeUnit <span class="keyword">in</span> dogString.utf16 {</div><div class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(codeUnit)</span> "</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 68 111 103 33 55357 56374</span></div><div class="line"><span class="keyword">for</span> scalar <span class="keyword">in</span> dogString.unicodeScalars {</div><div class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(scalar.value)</span> "</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 68 111 103 33 128054</span></div></pre></td></tr></table></figure>
+
+<h1 id="集合类型">集合类型</h1>
+<ul>
+<li>数组</li>
+<li>字典</li>
+</ul>
+<h2 id="数组">数组</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 构造数组</span></div><div class="line"><span class="keyword">var</span> a = []</div><div class="line"><span class="keyword">var</span> b = [<span class="type">Int</span>]()</div><div class="line"><span class="comment">// 构造3个同为0.0的初始值</span></div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span> = [<span class="type">Double</span>](<span class="built_in">count</span>: <span class="number">3</span>, repeatedValue: <span class="number">0.0</span>)</div><div class="line"><span class="comment">// 数组相加</span></div><div class="line"><span class="keyword">var</span> d = [<span class="string">"h"</span>, <span class="string">"e"</span>] + [<span class="string">"l"</span>, <span class="string">"l"</span>, <span class="string">"o"</span>]</div><div class="line"><span class="keyword">var</span> shoppingList: [<span class="type">String</span>] = [<span class="string">"Eggs"</span>, <span class="string">"Milk"</span>]</div><div class="line"><span class="comment">// 数组大小</span></div><div class="line">shoppingList.<span class="built_in">count</span></div><div class="line"><span class="comment">// 是否为空</span></div><div class="line"><span class="keyword">if</span> shoppingList.isEmpty {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"list is empty"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 添加一项到最后</span></div><div class="line">shoppingList.append(<span class="string">"Flour"</span>)</div><div class="line"><span class="comment">// 添加多项到最后</span></div><div class="line">shoppingList += [<span class="string">"Cheese"</span>, <span class="string">"Butter"</span>]</div><div class="line"><span class="comment">// 添加一项到指定位置</span></div><div class="line">shoppingList.insert(<span class="string">"Bean"</span>, atIndex: <span class="number">0</span>)</div><div class="line"><span class="comment">// 删除指定一项</span></div><div class="line">shoppingList.removeAtIndex(<span class="number">0</span>)</div><div class="line"><span class="comment">// 删除最后一项</span></div><div class="line">shoppingList.removeLast()</div><div class="line"><span class="comment">// 批量替换</span></div><div class="line">shoppingList[<span class="number">1</span>...<span class="number">3</span>] = [<span class="string">"Bananas"</span>, <span class="string">"Apples"</span>]</div><div class="line"><span class="comment">// 遍历</span></div><div class="line"><span class="keyword">for</span> item <span class="keyword">in</span> shoppingList {</div><div class="line">  <span class="built_in">println</span>(item)</div><div class="line">}</div><div class="line"><span class="keyword">for</span> (index, value) <span class="keyword">in</span> <span class="class"><span class="keyword">enum</span><span class="title">erate</span>(<span class="title">shoppingList</span>) </span>{</div><div class="line">  <span class="built_in">println</span>(<span class="string">"Item <span class="subst">\(index + <span class="number">1</span>)</span>: <span class="subst">\(value)</span>"</span>)</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="字典">字典</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 构造字典</span></div><div class="line"><span class="keyword">var</span> a = [<span class="string">"TYO"</span>: <span class="string">"Tokyo"</span>, <span class="string">"DUB"</span>: <span class="string">"Dublin"</span>]</div><div class="line"><span class="keyword">var</span> b = <span class="type">Dictionary</span>&lt;<span class="type">Int</span>, <span class="type">String</span>&gt;()</div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span>[<span class="number">16</span>] = <span class="string">"sixteen"</span></div><div class="line"><span class="keyword">var</span> <span class="built_in">c</span> = [:]</div><div class="line"><span class="keyword">var</span> airports: [<span class="type">String</span>: <span class="type">String</span>] = [<span class="string">"TYO"</span>: <span class="string">"Tokyo"</span>, <span class="string">"DUB"</span>: <span class="string">"Dublin"</span>]</div><div class="line"><span class="comment">// 字典大小</span></div><div class="line">airports.<span class="built_in">count</span></div><div class="line"><span class="comment">// 是否为空</span></div><div class="line"><span class="keyword">if</span> airports.isEmpty {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"list is empty"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 添加一项</span></div><div class="line">airports[<span class="string">"LHR"</span>] = <span class="string">"London"</span></div><div class="line"><span class="comment">// 修改</span></div><div class="line">airports[<span class="string">"LHR"</span>] = <span class="string">"London Heathrow"</span></div><div class="line"><span class="comment">// 修改，返回修改前的值</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> oldValue = airports.updateValue(<span class="string">"Dublin Internation"</span>, forKey: <span class="string">"DUB"</span>) {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"The old vaule was <span class="subst">\(oldValue)</span>"</span>)</div><div class="line">} <span class="keyword">else</span> {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"That is not in the list"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 删除</span></div><div class="line">airports[<span class="string">"LHR"</span>] = <span class="built_in">nil</span></div><div class="line"><span class="comment">// 删除，返回被删除的值</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> removedValue = airports.removeVauleForKey(<span class="string">"DUB"</span>) {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"The removed item is <span class="subst">\(removedValue)</span>"</span>)</div><div class="line">} <span class="keyword">else</span> {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"That is not in the list"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 遍历</span></div><div class="line"><span class="keyword">for</span> (airportCode, airportName) <span class="keyword">in</span> airports {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"<span class="subst">\(airportCode)</span>: <span class="subst">\(airportName)</span>"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 遍历key</span></div><div class="line"><span class="keyword">for</span> airportCode <span class="keyword">in</span> airports.keys {</div><div class="line">  <span class="built_in">println</span>(airportCode)</div><div class="line">}</div><div class="line"><span class="comment">// 遍历value</span></div><div class="line"><span class="keyword">for</span> airportName <span class="keyword">in</span> airports.values {</div><div class="line">  <span class="built_in">println</span>(airportName)</div><div class="line">}</div><div class="line"><span class="comment">// 用keys或values构造新数组</span></div><div class="line"><span class="keyword">let</span> airportCodes = <span class="type">Array</span>(airports.keys)</div><div class="line"><span class="keyword">let</span> airportNames = <span class="type">Array</span>(airports.values)</div></pre></td></tr></table></figure>
+
+<h1 id="控制流">控制流</h1>
+<ul>
+<li>循环语句<ul>
+<li>for</li>
+<li>while</li>
+</ul>
+</li>
+<li>条件语句<ul>
+<li>if</li>
+<li>switch</li>
+<li>where</li>
+</ul>
+</li>
+<li>控制转移语句<ul>
+<li>continue</li>
+<li>break</li>
+<li>fallthrough</li>
+<li>return</li>
+</ul>
+</li>
+</ul>
+<h2 id="循环语句">循环语句</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 遍历区间</span></div><div class="line"><span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">1</span>...<span class="number">5</span> {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"hello world"</span>);</div><div class="line">}</div><div class="line"><span class="comment">// 遍历数组</span></div><div class="line"><span class="keyword">let</span> names = [<span class="string">"Anna"</span>, <span class="string">"Alex"</span>, <span class="string">"Brian"</span>, <span class="string">"Jack"</span>]</div><div class="line"><span class="keyword">for</span> name <span class="keyword">in</span> names {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"Hello, <span class="subst">\(name)</span>"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 遍历字典</span></div><div class="line"><span class="keyword">let</span> numOfLegs = [<span class="string">"spider"</span>: <span class="number">8</span>, <span class="string">"ant"</span>: <span class="number">6</span>, <span class="string">"cat"</span>: <span class="number">4</span>]</div><div class="line"><span class="keyword">for</span> (name, <span class="built_in">count</span>) <span class="keyword">in</span> numOfLegs {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"<span class="subst">\(name)</span> have <span class="subst">\(<span class="built_in">count</span>)</span> legs"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 遍历字符串</span></div><div class="line"><span class="keyword">for</span> char <span class="keyword">in</span> <span class="string">"Hello"</span> {</div><div class="line">  <span class="built_in">println</span>(char)</div><div class="line">}</div><div class="line"><span class="comment">// 条件递增</span></div><div class="line"><span class="keyword">for</span> <span class="keyword">var</span> index = <span class="number">0</span>; index &lt; <span class="number">3</span>; ++index {</div><div class="line">  <span class="built_in">println</span>(index)</div><div class="line">}</div><div class="line"><span class="comment">// while循环</span></div><div class="line"><span class="keyword">var</span> i = <span class="number">0</span></div><div class="line"><span class="keyword">while</span> i &lt; <span class="number">10</span> {</div><div class="line">  <span class="built_in">println</span>(i++)</div><div class="line">}</div><div class="line"><span class="keyword">var</span> j = <span class="number">0</span></div><div class="line"><span class="keyword">do</span> {</div><div class="line">  <span class="built_in">println</span>(j++)</div><div class="line">} <span class="keyword">while</span> j &lt; <span class="number">10</span></div></pre></td></tr></table></figure>
+
+<h2 id="条件语句">条件语句</h2>
+<h3 id="if">if</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = -<span class="number">1</span></div><div class="line"><span class="keyword">if</span> a &lt; <span class="number">0</span> {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"condition 1"</span>)</div><div class="line">} <span class="keyword">else</span> <span class="keyword">if</span> (a &gt; <span class="number">10</span>) {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"condition 2"</span>)</div><div class="line">} <span class="keyword">else</span> {</div><div class="line">  <span class="built_in">println</span>(<span class="string">"condition 4"</span>)</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="switch">switch</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 正确</span></div><div class="line"><span class="keyword">let</span> someCharacter: <span class="type">Character</span> = <span class="string">"e"</span></div><div class="line"><span class="keyword">switch</span> someCharacter {</div><div class="line"><span class="keyword">case</span> <span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>, <span class="string">"o"</span>, <span class="string">"u"</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"<span class="subst">\(someCharacter)</span> is a vowel"</span>)</div><div class="line"><span class="keyword">case</span> <span class="string">"b"</span>, <span class="string">"c"</span>, <span class="string">"d"</span>, <span class="string">"f"</span>, <span class="string">"g"</span>, <span class="string">"h"</span>, <span class="string">"j"</span>, <span class="string">"k"</span>, <span class="string">"l"</span>, <span class="string">"m"</span>,</div><div class="line"><span class="string">"n"</span>, <span class="string">"p"</span>, <span class="string">"q"</span>, <span class="string">"r"</span>, <span class="string">"s"</span>, <span class="string">"t"</span>, <span class="string">"v"</span>, <span class="string">"w"</span>, <span class="string">"x"</span>, <span class="string">"y"</span>, <span class="string">"z"</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"<span class="subst">\(someCharacter)</span> is a consonant"</span>)</div><div class="line"><span class="keyword">default</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"<span class="subst">\(someCharacter)</span> is not a vowel or a consonant"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 错误</span></div><div class="line"><span class="keyword">let</span> anotherCharacter: <span class="type">Character</span> = <span class="string">"a"</span></div><div class="line"><span class="keyword">switch</span> anotherCharacter {</div><div class="line"><span class="keyword">case</span> <span class="string">"a"</span>:</div><div class="line"><span class="keyword">case</span> <span class="string">"A"</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"The letter A"</span>)</div><div class="line"><span class="keyword">default</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"Not the letter A"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 区间匹配</span></div><div class="line"><span class="keyword">let</span> score = <span class="number">80</span></div><div class="line"><span class="keyword">switch</span> score {</div><div class="line"><span class="keyword">case</span> <span class="number">0</span>...<span class="number">59</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"bad"</span>)</div><div class="line"><span class="keyword">case</span> <span class="number">60</span>...<span class="number">79</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"ok"</span>)</div><div class="line"><span class="keyword">case</span> <span class="number">80</span>...<span class="number">89</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"excellent"</span>)</div><div class="line"><span class="keyword">case</span> <span class="number">90</span>...<span class="number">100</span></div><div class="line">  <span class="built_in">println</span>(<span class="string">"perfect"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 元组</span></div><div class="line"><span class="keyword">let</span> somePoint = (<span class="number">1</span>, <span class="number">1</span>)</div><div class="line"><span class="keyword">switch</span> somePoint {</div><div class="line"><span class="keyword">case</span> (<span class="number">0</span>, <span class="number">0</span>):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"(0, 0) is at the origin"</span>)</div><div class="line"><span class="keyword">case</span> (<span class="number">_</span>, <span class="number">0</span>):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"(<span class="subst">\(somePoint.<span class="number">0</span>)</span>, 0) is on the x-axis"</span>)</div><div class="line"><span class="keyword">case</span> (<span class="number">0</span>, <span class="number">_</span>):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"(0, <span class="subst">\(somePoint.<span class="number">1</span>)</span>) is on the y-axis"</span>)</div><div class="line"><span class="keyword">case</span> (-<span class="number">2</span>...<span class="number">2</span>, -<span class="number">2</span>...<span class="number">2</span>):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"(<span class="subst">\(somePoint.<span class="number">0</span>)</span>, <span class="subst">\(somePoint.<span class="number">1</span>)</span>) is inside the box"</span>)</div><div class="line"><span class="keyword">default</span>:</div><div class="line">    <span class="built_in">println</span>(<span class="string">"(<span class="subst">\(somePoint.<span class="number">0</span>)</span>, <span class="subst">\(somePoint.<span class="number">1</span>)</span>) is outside of the box"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 值绑定</span></div><div class="line"><span class="keyword">let</span> anotherPoint = (<span class="number">2</span>, <span class="number">0</span>)</div><div class="line"><span class="keyword">switch</span> anotherPoint {</div><div class="line"><span class="keyword">case</span> (<span class="keyword">let</span> x, <span class="number">0</span>):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"on the x-axis with an x value of <span class="subst">\(x)</span>"</span>)</div><div class="line"><span class="keyword">case</span> (<span class="number">0</span>, <span class="keyword">let</span> y):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"on the y-axis with a y value of <span class="subst">\(y)</span>"</span>)</div><div class="line"><span class="keyword">case</span> <span class="keyword">let</span> (x, y):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"somewhere else at (<span class="subst">\(x)</span>, <span class="subst">\(y)</span>)"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// where</span></div><div class="line"><span class="keyword">let</span> yetAnotherPoint = (<span class="number">1</span>, -<span class="number">1</span>)</div><div class="line"><span class="keyword">switch</span> yetAnotherPoint {</div><div class="line"><span class="keyword">case</span> <span class="keyword">let</span> (x, y) <span class="keyword">where</span> x == y:</div><div class="line">    <span class="built_in">println</span>(<span class="string">"(<span class="subst">\(x)</span>, <span class="subst">\(y)</span>) is on the line x == y"</span>)</div><div class="line"><span class="keyword">case</span> <span class="keyword">let</span> (x, y) <span class="keyword">where</span> x == -y:</div><div class="line">    <span class="built_in">println</span>(<span class="string">"(<span class="subst">\(x)</span>, <span class="subst">\(y)</span>) is on the line x == -y"</span>)</div><div class="line"><span class="keyword">case</span> <span class="keyword">let</span> (x, y):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"(<span class="subst">\(x)</span>, <span class="subst">\(y)</span>) is just some arbitrary point"</span>)</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="控制转移语句">控制转移语句</h2>
+<h3 id="continue">continue</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 继续下个循环</span></div><div class="line"><span class="keyword">let</span> input = <span class="string">"great minds think alike"</span></div><div class="line"><span class="keyword">var</span> output = <span class="string">""</span></div><div class="line"><span class="keyword">for</span> <span class="keyword">char</span> <span class="keyword">in</span> input {</div><div class="line">  <span class="keyword">switch</span> <span class="keyword">char</span> {</div><div class="line">  <span class="keyword">case</span> <span class="string">"a"</span>, <span class="string">"e"</span>, <span class="string">"i"</span>, <span class="string">"o"</span>, <span class="string">"u"</span>:</div><div class="line">    <span class="keyword">continue</span></div><div class="line">  <span class="keyword">default</span>:</div><div class="line">    output.append(<span class="keyword">char</span>)</div><div class="line">  }</div><div class="line">}</div><div class="line">println(output)</div></pre></td></tr></table></figure>
+
+<h3 id="break">break</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 循环语句中的break，结束循环</span></div><div class="line"><span class="keyword">for</span> char <span class="keyword">in</span> <span class="string">"hello"</span> {</div><div class="line">  <span class="keyword">if</span> char == <span class="string">"l"</span> {</div><div class="line">    <span class="keyword">break</span></div><div class="line">  }</div><div class="line">}</div><div class="line"><span class="comment">// switch语句中得break，忽略该分支</span></div><div class="line"><span class="keyword">let</span> numberSymbol: <span class="type">Character</span> = <span class="string">"三"</span></div><div class="line"><span class="keyword">switch</span> numberSymbol {</div><div class="line"><span class="keyword">case</span> <span class="string">"一"</span>:</div><div class="line">    <span class="built_in">println</span>(<span class="string">"1"</span>)</div><div class="line"><span class="keyword">case</span> <span class="string">"二"</span>:</div><div class="line">    <span class="built_in">println</span>(<span class="string">"2"</span>)</div><div class="line"><span class="keyword">case</span> <span class="string">"三"</span>:</div><div class="line">    <span class="built_in">println</span>(<span class="string">"3"</span>)</div><div class="line"><span class="keyword">case</span> <span class="string">"四"</span>:</div><div class="line">    <span class="built_in">println</span>(<span class="string">"4"</span>)</div><div class="line"><span class="keyword">default</span>:</div><div class="line">    <span class="keyword">break</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="fallthrough">fallthrough</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 使用fallthrough贯穿下个分支</span></div><div class="line"><span class="keyword">let</span> integerToDescribe = <span class="number">5</span></div><div class="line"><span class="keyword">var</span> description = <span class="string">"The number <span class="subst">\(integerToDescribe)</span> is"</span></div><div class="line"><span class="keyword">switch</span> integerToDescribe {</div><div class="line"><span class="keyword">case</span> <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>, <span class="number">19</span>:</div><div class="line">    description += <span class="string">" a prime number, and also"</span></div><div class="line">    <span class="keyword">fallthrough</span></div><div class="line"><span class="keyword">default</span>:</div><div class="line">    description += <span class="string">" an integer."</span></div><div class="line">}</div><div class="line"><span class="built_in">println</span>(description)</div></pre></td></tr></table></figure>
+
+<h3 id="带标签的语句">带标签的语句</h3>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span> 在使用<span class="keyword">break</span>或<span class="keyword">continue</span>的时候可以指定操作哪个控制流</div><div class="line"><span class="reserved">var</span> i = <span class="number">0</span>;</div><div class="line"><span class="attribute">loop</span>: <span class="keyword">while</span> i &lt; <span class="number">100</span> {</div><div class="line">  <span class="keyword">if</span> i == <span class="number">30</span> {</div><div class="line">    <span class="keyword">break</span> <span class="keyword">loop</span></div><div class="line">  }</div><div class="line">  i++</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h1 id="函数">函数</h1>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line">// 有返回值</div><div class="line">func len(<span class="operator"><span class="keyword">start</span>: <span class="built_in">Int</span>, <span class="keyword">end</span>: <span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> {</span></div><div class="line">  <span class="keyword">return</span> <span class="keyword">end</span> - <span class="keyword">start</span></div><div class="line">}</div><div class="line">// 无返回值</div><div class="line">func sayHello(name: <span class="keyword">String</span>) {</div><div class="line">  println(<span class="string">"Hello, \(name)"</span>)</div><div class="line">}</div><div class="line">// 多重返回值</div><div class="line">func search(name: <span class="keyword">String</span>) -&gt; (id: <span class="built_in">Int</span>, name: <span class="keyword">String</span>) {</div><div class="line">  <span class="keyword">var</span> map = [<span class="string">"jason"</span>: <span class="number">1</span>, <span class="string">"mark"</span>: <span class="number">2</span>]</div><div class="line">  <span class="keyword">return</span> (name, map[name])</div><div class="line">}</div><div class="line">// 外部参数名</div><div class="line">func <span class="keyword">join</span>(<span class="keyword">str</span> s1: <span class="keyword">String</span>, toStr s2: <span class="keyword">String</span>, joiner joiner: <span class="keyword">String</span>) -&gt; <span class="keyword">String</span> {</div><div class="line">    <span class="keyword">return</span> s1 + joiner + s2</div><div class="line">}</div><div class="line"><span class="keyword">join</span>(<span class="keyword">str</span>: <span class="string">"hello"</span>, toStr: <span class="string">"world"</span>, joiner: <span class="string">"，"</span>)</div><div class="line">// 简写外部参数名</div><div class="line">func <span class="keyword">join</span>(#<span class="keyword">str</span>: <span class="keyword">String</span>, #toStr: <span class="keyword">String</span>, #joiner: <span class="keyword">String</span>) -&gt; <span class="keyword">String</span> {</div><div class="line">  <span class="keyword">return</span> <span class="keyword">str</span> + joiner + toStr</div><div class="line">}</div><div class="line"><span class="keyword">join</span>(<span class="keyword">str</span>: <span class="string">"hello"</span>, toStr: <span class="string">"world"</span>, joiner: <span class="string">"，"</span>)</div><div class="line">// 默认参数</div><div class="line">func <span class="keyword">join</span>(<span class="keyword">str</span> s1: <span class="keyword">String</span>, toStr s2: <span class="keyword">String</span>, joiner joiner: <span class="keyword">String</span> = <span class="string">" "</span>) -&gt; <span class="keyword">String</span> {</div><div class="line">  <span class="keyword">return</span> <span class="keyword">str</span> + joiner + toStr</div><div class="line">}</div><div class="line"><span class="keyword">join</span>(<span class="keyword">str</span>: <span class="string">"hello"</span>, toStr: <span class="string">"world"</span>)</div><div class="line">// 默认带上外部参数</div><div class="line">func <span class="keyword">join</span>(s1: <span class="keyword">String</span>, s2: <span class="keyword">String</span>, joiner: <span class="keyword">String</span> = <span class="string">" "</span>) -&gt; <span class="keyword">String</span> {</div><div class="line">    <span class="keyword">return</span> s1 + joiner + s2</div><div class="line">}</div><div class="line"><span class="keyword">join</span>(<span class="string">"hello"</span>, <span class="string">"world"</span>, joiner: <span class="string">"-"</span>)</div><div class="line">// 可变参数</div><div class="line">func arithmeticMean(numbers: <span class="keyword">Double</span>...) -&gt; <span class="keyword">Double</span> {</div><div class="line">    <span class="keyword">var</span> total: <span class="keyword">Double</span> = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> <span class="built_in">number</span> <span class="keyword">in</span> numbers {</div><div class="line">        total += <span class="built_in">number</span></div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> total / <span class="keyword">Double</span>(numbers.<span class="keyword">count</span>)</div><div class="line">}</div><div class="line">arithmeticMean(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</div><div class="line">// 函数参数默认是常量，不能改变，可以加<span class="keyword">var</span>来定义变量参数</div><div class="line">func hello(<span class="keyword">var</span> <span class="keyword">str</span>: <span class="keyword">String</span>) -&gt; <span class="keyword">String</span> {</div><div class="line">  <span class="keyword">str</span> += <span class="string">",hello"</span></div><div class="line">  <span class="keyword">return</span> <span class="keyword">str</span></div><div class="line">}</div><div class="line">// 改变参数值，加inout，且不能被<span class="keyword">var</span>或let标记</div><div class="line">func swapTwoInts(inout a: <span class="built_in">Int</span>, inout b: <span class="built_in">Int</span>) {</div><div class="line">    let temporaryA = a</div><div class="line">    a = b</div><div class="line">    b = temporaryA</div><div class="line">}</div><div class="line"><span class="keyword">var</span> someInt = <span class="number">3</span></div><div class="line"><span class="keyword">var</span> anotherInt = <span class="number">107</span></div><div class="line">swapTwoInts(&someInt, &anotherInt) // 传入时加&</div><div class="line">println(<span class="string">"\(someInt) and \(anotherInt)"</span>) // <span class="number">107</span> <span class="keyword">and</span> <span class="number">3</span></div><div class="line">// 使用函数</div><div class="line"><span class="keyword">var</span> mathFunction: (<span class="built_in">Int</span>, <span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> = addTwoInts</div><div class="line"><span class="keyword">var</span> anotherMathFunction = addTwoInts</div><div class="line">// 函数作为参数</div><div class="line">func printMathResult(mathFunction: (<span class="built_in">Int</span>, <span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span>, a: <span class="built_in">Int</span>, b: <span class="built_in">Int</span>) {</div><div class="line">    println(<span class="string">"Result: \(mathFunction(a, b))"</span>)</div><div class="line">}</div><div class="line">printMathResult(addTwoInts, <span class="number">3</span>, <span class="number">5</span>)</div><div class="line">// 函数作为返回值</div><div class="line">func stepForward(<span class="keyword">input</span>: <span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> {</div><div class="line">    <span class="keyword">return</span> <span class="keyword">input</span> + <span class="number">1</span></div><div class="line">}</div><div class="line">func stepBackward(<span class="keyword">input</span>: <span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> {</div><div class="line">    <span class="keyword">return</span> <span class="keyword">input</span> - <span class="number">1</span></div><div class="line">}</div><div class="line">func chooseStepFunction(backwards: Bool) -&gt; (<span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> {</div><div class="line">    <span class="keyword">return</span> backwards ? stepBackward : stepForward</div><div class="line">}</div><div class="line">// 嵌套函数</div><div class="line">func chooseStepFunction(backwards: Bool) -&gt; (<span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> {</div><div class="line">    func stepForward(<span class="keyword">input</span>: <span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> { <span class="keyword">return</span> <span class="keyword">input</span> + <span class="number">1</span> }</div><div class="line">    func stepBackward(<span class="keyword">input</span>: <span class="built_in">Int</span>) -&gt; <span class="built_in">Int</span> { <span class="keyword">return</span> <span class="keyword">input</span> - <span class="number">1</span> }</div><div class="line">    <span class="keyword">return</span> backwards ? stepBackward : stepForward</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h1 id="闭包">闭包</h1>
+<h2 id="格式">格式</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span> 格式</div><div class="line">{ <span class="function"><span class="params">(parameters)</span> -&gt;</span> returnType <span class="keyword">in</span></div><div class="line">  statements</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h2 id="闭包作为参数">闭包作为参数</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span> 原式</div><div class="line">func backwards<span class="function"><span class="params">(s1: String, s2: String)</span> -&gt;</span> Bool {</div><div class="line">    <span class="keyword">return</span> s1 &gt; s2</div><div class="line">}</div><div class="line"><span class="reserved">var</span> reversed = sorted(names, backwards)</div><div class="line"><span class="regexp">//</span> 使用闭包</div><div class="line"><span class="reserved">var</span> reversed = sorted<span class="function"><span class="params">(names, { (s1: String, s2: String) -&gt; Bool <span class="keyword">in</span></span></span></div><div class="line">  <span class="keyword">return</span> s1 &gt; s2</div><div class="line">})</div><div class="line">// 根据上下文推断类型</div><div class="line"><span class="title">var</span> <span class="title">reversed</span> = <span class="title">sorted</span><span class="params">(names, { s1, s2 <span class="keyword">in</span> <span class="keyword">return</span> s1 &gt; s2 })</span></div><div class="line">// 单表达式闭包隐式返回</div><div class="line"><span class="title">var</span> <span class="title">reversed</span> = <span class="title">sorted</span><span class="params">(names, { s1, s2 <span class="keyword">in</span> s1 &gt; s2})</span></div><div class="line">// 参数名称缩写</div><div class="line"><span class="title">var</span> <span class="title">reversed</span> = <span class="title">sorted</span><span class="params">(names, { $<span class="number">0</span> &gt; $<span class="number">1</span> })</span></div><div class="line">// 运算符函数</div><div class="line"><span class="title">var</span> <span class="title">reversed</span> = <span class="title">sorted</span><span class="params">(names, &gt;)</span></div><div class="line">// 尾随闭包进行函数调用</div><div class="line"><span class="title">func</span> <span class="title">someFunctionThatTakesAClosure</span><span class="params">(closure: () -&gt; ())</span> {</div><div class="line">  // 函数体部分</div><div class="line">}</div><div class="line"><span class="title">someFunctionThatTakesAClosure</span><span class="params">()</span> {</div><div class="line">  // 闭包主体部分</div><div class="line">}</div><div class="line">// 尾随闭包进行函数调用（例子）</div><div class="line"><span class="title">var</span> <span class="title">reversed</span> = <span class="title">sorted</span><span class="params">(names)</span> { <span class="title">$0</span> &gt; <span class="title">$1</span> }</div></pre></td></tr></table></figure>
+
+<h2 id="闭包作为返回值">闭包作为返回值</h2>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span> 闭包是引用类型，将闭包赋给两个不同的变量/常量，两个值都指向一个闭包</div><div class="line">func makeIncrementor<span class="function"><span class="params">(forIncrement amount: Int)</span> -&gt;</span> <span class="function"><span class="params">()</span> -&gt;</span> Int {</div><div class="line">    <span class="reserved">var</span> runningTotal = <span class="number">0</span></div><div class="line">    func incrementor<span class="function"><span class="params">()</span> -&gt;</span> Int {</div><div class="line">        runningTotal += amount</div><div class="line">        <span class="keyword">return</span> runningTotal</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> incrementor</div><div class="line">}</div><div class="line"><span class="reserved">let</span> incrementByTen = makeIncrementor(<span class="attribute">forIncrement</span>: <span class="number">10</span>)</div><div class="line"><span class="reserved">let</span> incrementBySeven = makeIncrementor(<span class="attribute">forIncrement</span>: <span class="number">7</span>)</div><div class="line">incrementBySeven() <span class="regexp">//</span> 返回的值为<span class="number">7</span></div><div class="line">incrementByTen() <span class="regexp">//</span> 返回的值为<span class="number">40</span></div></pre></td></tr></table></figure>
+
+<h1 id="枚举">枚举</h1>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CompassPoint</span> </span>{</div><div class="line">  <span class="keyword">case</span> <span class="type">North</span></div><div class="line">  <span class="keyword">case</span> <span class="type">South</span></div><div class="line">  <span class="keyword">case</span> <span class="type">East</span></div><div class="line">  <span class="keyword">case</span> <span class="type">West</span></div><div class="line">}</div><div class="line"><span class="comment">// 一行</span></div><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Planet</span> </span>{</div><div class="line">  <span class="keyword">case</span> <span class="type">Mercury</span>, <span class="type">Venus</span>, <span class="type">Earth</span>, <span class="type">Mars</span>, <span class="type">Jupiter</span>, <span class="type">Saturn</span>, <span class="type">Uranus</span>, <span class="type">Neptune</span></div><div class="line">}</div><div class="line"><span class="keyword">var</span> directionToHead = <span class="type">CompassPoint</span>.<span class="type">West</span></div><div class="line">directionToHead = .<span class="type">East</span> <span class="comment">// 前面已经赋值了，可以用忽略前缀</span></div><div class="line"><span class="keyword">switch</span> directionToHead {</div><div class="line"><span class="keyword">case</span> .<span class="type">North</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"North"</span>)</div><div class="line"><span class="keyword">case</span> .<span class="type">South</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"South"</span>)</div><div class="line"><span class="keyword">case</span> .<span class="type">East</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"East"</span>)</div><div class="line"><span class="keyword">case</span> .<span class="type">West</span>:</div><div class="line">  <span class="built_in">println</span>(<span class="string">"West"</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 使用案例</span></div><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Barcode</span> </span>{</div><div class="line">  <span class="keyword">case</span> <span class="type">UPCA</span>(<span class="type">Int</span>, <span class="type">Int</span>, <span class="type">Int</span>)</div><div class="line">  <span class="keyword">case</span> <span class="type">QRCode</span>(<span class="type">String</span>)</div><div class="line">}</div><div class="line"><span class="keyword">var</span> productBarcode = <span class="type">Barcode</span>.<span class="type">UPCS</span>(<span class="number">8</span>, <span class="number">85909_51226</span>, <span class="number">3</span>)</div><div class="line">productBarcode = .<span class="type">QRCode</span>(<span class="string">"ABCDEFGHIJKLMNOP"</span>)</div><div class="line"><span class="comment">// 用法</span></div><div class="line"><span class="keyword">switch</span> productBarcode {</div><div class="line"><span class="keyword">case</span> .<span class="type">UPCA</span>(<span class="keyword">let</span> numberSystem, <span class="keyword">let</span> identifier, <span class="keyword">let</span> check):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"UPC-A with value of <span class="subst">\(numberSystem)</span>, <span class="subst">\(identifier)</span>, <span class="subst">\(check)</span>."</span>)</div><div class="line"><span class="keyword">case</span> .<span class="type">QRCode</span>(<span class="keyword">let</span> productCode):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"QR code with value of <span class="subst">\(productCode)</span>."</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 简化</span></div><div class="line"><span class="keyword">switch</span> productBarcode {</div><div class="line"><span class="keyword">case</span> <span class="keyword">let</span> .<span class="type">UPCA</span>(numberSystem, identifier, check):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"UPC-A with value of <span class="subst">\(numberSystem)</span>, <span class="subst">\(identifier)</span>, <span class="subst">\(check)</span>."</span>)</div><div class="line"><span class="keyword">case</span> <span class="keyword">let</span> .<span class="type">QRCode</span>(productCode):</div><div class="line">    <span class="built_in">println</span>(<span class="string">"QR code with value of <span class="subst">\(productCode)</span>."</span>)</div><div class="line">}</div><div class="line"><span class="comment">// 赋原始值，当整型被赋原始值，其他成员没有值，会自动递增</span></div><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Planet</span>: <span class="title">Int</span> </span>{</div><div class="line">    <span class="keyword">case</span> <span class="type">Mercury</span> = <span class="number">1</span>, <span class="type">Venus</span>, <span class="type">Earth</span>, <span class="type">Mars</span>, <span class="type">Jupiter</span>, <span class="type">Saturn</span>, <span class="type">Uranus</span>, <span class="type">Neptune</span></div><div class="line">}</div><div class="line"><span class="keyword">let</span> earthsOrder = <span class="type">Planet</span>.<span class="type">Earth</span>.toRaw() <span class="comment">// earthsOrder为3</span></div><div class="line"><span class="keyword">let</span> possiblePlanet = <span class="type">Planet</span>.fromRaw(<span class="number">7</span>) <span class="comment">// possiblePlanet为可选值，为Planet.Uranus</span></div></pre></td></tr></table></figure>
+
+<p>未完待续</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/IOS/">IOS</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2015/01/26/Swift学习笔记/" data-title="Swift学习笔记 | 特首的前端日志" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2014/10/29/NodeJs教程/"  title="NodeJs教程">
+ <strong>NEXT:</strong><br/> 
+ <span>NodeJs教程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基础部分"><span class="toc-number">1.</span> <span class="toc-text">基础部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常量与变量"><span class="toc-number">1.1.</span> <span class="toc-text">常量与变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">1.2.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-number">1.3.</span> <span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整数"><span class="toc-number">1.3.1.</span> <span class="toc-text">整数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浮点型"><span class="toc-number">1.3.2.</span> <span class="toc-text">浮点型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组"><span class="toc-number">1.3.3.</span> <span class="toc-text">元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数值型字面量"><span class="toc-number">1.3.4.</span> <span class="toc-text">数值型字面量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数值类型转化"><span class="toc-number">1.3.5.</span> <span class="toc-text">数值类型转化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类型别名"><span class="toc-number">1.3.6.</span> <span class="toc-text">类型别名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#可选类型"><span class="toc-number">1.3.7.</span> <span class="toc-text">可选类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调试"><span class="toc-number">1.4.</span> <span class="toc-text">调试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基本运算符"><span class="toc-number">2.</span> <span class="toc-text">基本运算符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#字符串和字符"><span class="toc-number">3.</span> <span class="toc-text">字符串和字符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集合类型"><span class="toc-number">4.</span> <span class="toc-text">集合类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组"><span class="toc-number">4.1.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字典"><span class="toc-number">4.2.</span> <span class="toc-text">字典</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#控制流"><span class="toc-number">5.</span> <span class="toc-text">控制流</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-number">5.1.</span> <span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件语句"><span class="toc-number">5.2.</span> <span class="toc-text">条件语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#if"><span class="toc-number">5.2.1.</span> <span class="toc-text">if</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#switch"><span class="toc-number">5.2.2.</span> <span class="toc-text">switch</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控制转移语句"><span class="toc-number">5.3.</span> <span class="toc-text">控制转移语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#continue"><span class="toc-number">5.3.1.</span> <span class="toc-text">continue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#break"><span class="toc-number">5.3.2.</span> <span class="toc-text">break</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fallthrough"><span class="toc-number">5.3.3.</span> <span class="toc-text">fallthrough</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#带标签的语句"><span class="toc-number">5.3.4.</span> <span class="toc-text">带标签的语句</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数"><span class="toc-number">6.</span> <span class="toc-text">函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#闭包"><span class="toc-number">7.</span> <span class="toc-text">闭包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#格式"><span class="toc-number">7.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包作为参数"><span class="toc-number">7.2.</span> <span class="toc-text">闭包作为参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包作为返回值"><span class="toc-number">7.3.</span> <span class="toc-text">闭包作为返回值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#枚举"><span class="toc-number">8.</span> <span class="toc-text">枚举</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Gulp/" title="Gulp">Gulp<sup>1</sup></a></li>
+		
+			<li><a href="/tags/IOS/" title="IOS">IOS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Javascript/" title="Javascript">Javascript<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Jason <br/>
+			My blog will update monthly</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1164450580" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/markpop" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="特首">特首</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"markpop"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-54795545-2', 'auto');  
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

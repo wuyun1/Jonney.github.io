@@ -1,0 +1,579 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>NodeJs教程 | 特首的前端日志</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="特首">
+    
+    <meta name="description" content="介绍
+随着Node.js的发展，Javascript应用在这几年突飞猛进的流行。如果你去modulecounts.com上看看，你会发现Node packages已经超过了Ruby。另外Node packages的发展速度已经超过了Ruby、Python和Java总和。在这篇文章里将介绍Node最重">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="特首的前端日志" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/icon.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/icon.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/rocket.jpg" alt="特首的前端日志" title="特首的前端日志"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="特首的前端日志">特首的前端日志</a></h1>
+				<h2 class="blog-motto">我不是大神，可我是要成为大神的男人</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/10/29/NodeJs教程/" title="NodeJs教程" itemprop="url">NodeJs教程</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="特首">特首</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-10-29T07:53:03.000Z" itemprop="datePublished">10月 29 2014</time>
+    更新日期:<time datetime="2015-01-26T14:50:24.000Z" itemprop="dateModified">1月 26 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<h2 id="介绍">介绍</h2>
+<p>随着Node.js的发展，Javascript应用在这几年突飞猛进的流行。如果你去<a href="//www.modulecounts.com/">modulecounts.com</a>上看看，你会发现Node packages已经超过了Ruby。另外Node packages的发展速度已经超过了Ruby、Python和Java总和。<br><img src="/img/node/img-1.jpg" alt="modulecounts"><br>在这篇文章里将介绍Node最重要的几个方面带领你走上正轨，开始构建自己的应用。</p>
+<h3 id="是什么让Node比Rails及其他语言更加流行？">是什么让Node比Rails及其他语言更加流行？</h3>
+<p>Node自身构建在Chrome最强的的Javascript引擎，作为异步式、事件驱动的框架，专为建设可伸缩网络应用而设计。基本上是Javascript加一堆C/C++的互相作用的文件系统，来启动HTTP或TCP等服务。</p>
+<p>Node是单线程的，使用基于event loop的并发模型。它是非阻塞的，所以它不会使程序等待，而是注册一个回调函数使程序继续运行。这意味着我们不使用多线程也可以操控异步操作。</p>
+<p>在一些顺序执行的语言中如PHP，为了获取HTML的内容，你会这么做：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$response</span> = file_get_contents(<span class="string">"http://example.com"</span>);</div><div class="line">print_r(<span class="variable">$response</span>);</div></pre></td></tr></table></figure>
+
+<p>在Node你用回调函数可以这么做：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line">http.request({ hostname: <span class="string">'example.com'</span> }, <span class="function"><span class="keyword">function</span><span class="params">(res)</span> </span>{</div><div class="line">  res.setEncoding(<span class="string">'utf8'</span>);</div><div class="line">  res.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span><span class="params">(chunk)</span> </span>{</div><div class="line">    <span class="built_in">console</span>.log(chunk);</div><div class="line">  });</div><div class="line">}).end();</div></pre></td></tr></table></figure>
+
+<p>在实现方面有两大不同：</p>
+<blockquote>
+<ul>
+<li>Node允许在等待响应的时候执行其他任务。</li>
+<li>Node应用程序不将缓存文件放到内存中，但它会将文件一部分一部分的输出。</li>
+</ul>
+</blockquote>
+<p>Node和其他event loop驱动的系统（如Ruby的EventMachine library和Python的Twisted）有很大的不同。</p>
+<p>Node所有的类库完全是为非阻塞而设计的，其他的就不能这么说了。</p>
+<h3 id="使用场景">使用场景</h3>
+<p>Node是I/O限制应用（或等待用户事件应用）的理想开发工具，可是并不适用于大量使用CPU的应用，但在数据密集型实时应用（DIRT）、单页应用、JSON API服务和数据流应用中表现出色。</p>
+<h3 id="npm，官方Node_package包管理工具">npm，官方Node package包管理工具</h3>
+<p>Node的成功很大部分归功于npm，npm是随Node一起安装的package包管理工具。npm有很多优点：</p>
+<blockquote>
+<ul>
+<li>将应用依赖类库安装在项目下，而非全局安装。</li>
+<li>能在同一时间管理不同版本的同一模块。</li>
+<li>你能指定压缩包或git仓库来安装。</li>
+<li>你能很容易的发布自己的模块到npm上。</li>
+<li>在创建CLI（其他人可以通过npm安装并使用）应用很有用。</li>
+</ul>
+</blockquote>
+<h3 id="资源">资源</h3>
+<p>想了解更多关于为什么用Node，可以访问<a href="//www.toptal.com/nodejs/why-the-hell-would-i-use-node-js">这篇文章</a>。</p>
+<h2 id="安装Node-js和NPM">安装Node.js和NPM</h2>
+<p>在Windows和OS X下可以通过专门的安装包安装，然而有时候你想在不同版本的Node上测试自己的代码，可以使用NVM（Node Version manager）。</p>
+<p>通过NVM你可以安装不同版本的Node在你的操作系统里，实现不同版本间的切换。下面介绍如何在Ubuntu系统下安装NVM。</p>
+<p>首先我们要确保我们系统安装了C++编译器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">sudo</span> apt-get update</div><div class="line">$ <span class="built_in">sudo</span> apt-get install build-essential libssl-dev</div></pre></td></tr></table></figure>
+
+<p>接着拷贝下面这行命令到控制台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">13.1</span>/install.sh | bash</div></pre></td></tr></table></figure>
+
+<p>在此NVM应该就被正确安装了，我们确认一下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nvm</div></pre></td></tr></table></figure>
+
+<p>如果当输入<code>nvm</code>时没有出现错误，表示安装成功。现在我们可以安装Node和npm了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nvm install v0.<span class="number">10.31</span></div></pre></td></tr></table></figure>
+
+<p>输出应该是这样的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ nvm install v0.<span class="number">10.31</span></div><div class="line"><span class="comment">################################################################## 100.0%</span></div><div class="line">Now using node v0.<span class="number">10.31</span></div></pre></td></tr></table></figure>
+
+<p>这样node和npm都可以在控制台使用了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ node -v && npm -v</div><div class="line">v0.<span class="number">10.31</span></div><div class="line"><span class="number">1.4</span>.<span class="number">23</span></div></pre></td></tr></table></figure>
+
+<p>还有最后一件事我们需要做，需要设置设置默认的Node版本当我们下次登录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ nvm alias default <span class="number">0.10</span>.<span class="number">31</span></div></pre></td></tr></table></figure>
+
+<p>我们可以安装其他版本的Node就像我们之前那样安装，可以使用<code>nvm use</code>进行版本切换：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ nvm install v0.<span class="number">8.10</span></div><div class="line">$ nvm use v0.<span class="number">8.10</span></div></pre></td></tr></table></figure>
+
+<p>如果不知道你在系统了装了什么版本的Node，你可以输入<code>nvm list</code>，将以列表形式显示版本信息，包括现在版本和默认版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$ nvm list</div><div class="line">v0.<span class="number">6.3</span></div><div class="line">v0.<span class="number">6.12</span></div><div class="line">v0.<span class="number">6.14</span></div><div class="line">v0.<span class="number">6.19</span></div><div class="line">v0.<span class="number">7.7</span></div><div class="line">v0.<span class="number">7.8</span></div><div class="line">v0.<span class="number">7.9</span></div><div class="line">v0.<span class="number">8.6</span></div><div class="line">v0.<span class="number">8.11</span></div><div class="line">v0.<span class="number">10.3</span></div><div class="line">v0.<span class="number">10.12</span></div><div class="line">v0.<span class="number">10.15</span></div><div class="line">v0.<span class="number">10.21</span></div><div class="line">v0.<span class="number">10.24</span></div><div class="line">v0.<span class="number">11.9</span></div><div class="line">current: v0.<span class="number">10.24</span></div><div class="line">default -&gt; v0.<span class="number">10.24</span></div></pre></td></tr></table></figure>
+
+<h3 id="资源-1">资源</h3>
+<p>想了解更多关于如何用NVM安装Node，请访问<a href="//www.digitalocean.com/community/tutorials/how-to-install-node-js-with-nvm-node-version-manager-on-a-vps">这篇文章</a>。</p>
+<h2 id="Node基础">Node基础</h2>
+<p>我们将看下Node.js主要概念：</p>
+<blockquote>
+<ul>
+<li>如何引入外部模块</li>
+<li>回调函数的作用</li>
+<li>事件驱动（EventEmitter）模式</li>
+<li>数据流</li>
+</ul>
+</blockquote>
+<h3 id="模块">模块</h3>
+<p>Java和Python用<code>import</code>去加载其他模块，PHP和Ruby用<code>require</code>加载。Node在模块上实现了CommonJS接口，通过<code>require</code>关键字去加载依赖模块。</p>
+<p>例如我们可以这样加载系统模块：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">var</span> dns = <span class="built_in">require</span>(<span class="string">'dns'</span>);</div></pre></td></tr></table></figure>
+
+<p>我们还能加载本地文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myFile = <span class="built_in">require</span>(<span class="string">'./myFile'</span>); <span class="comment">// loads myFile.js</span></div></pre></td></tr></table></figure>
+
+<p>用那npm安装模块，可在<a href="//www.npmjs.org/">这个网站</a>或Github上搜索。下面介绍如何下载模块到本地：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># where express === module name</span></div><div class="line">$ npm install express</div></pre></td></tr></table></figure>
+
+<p>你能在代码里引用npm安装的模块，和引用系统模块一样，你不用考虑绝对和相对路径。</p>
+<p>有一点非常好的是Node模块不会自动污染全局作用域，相反你需要为模块分配一个变量名，这意味着你不用担心两个或多个模块里的函数名称冲突了。</p>
+<p>当创建你自己的模块，在<code>exports</code>的时候需要注意（无论是函数、对象、数字或是其它）。你让<code>exports</code>等于一个对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = { name: <span class="string">'John'</span>, age: <span class="number">20</span> };</div><div class="line"><span class="built_in">module</span>.exports = person;</div></pre></td></tr></table></figure>
+
+<p>也可以直接在<code>exports</code>对象上添加相应的属性或函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">exports.name = <span class="string">'John'</span>;</div><div class="line">exports.age = <span class="number">20</span>;</div></pre></td></tr></table></figure>
+
+<p>不同的模块之间不共享作用域，所以如果你想要在不同的模块之间共享变量，你必须引入这个模块。另一个需要注意的是模块只加载一次，之后将缓存到Node。</p>
+<p>跟浏览器不同，Node没有<code>window</code>全局变量，但是有两个全局变量<code>globals</code>和<code>process</code>，你必须避免在这两个全局变量添加属性或函数。</p>
+<h3 id="回调函数">回调函数</h3>
+<p>在异步编程里，如果函数没有执行完成是不会返回值的，不过我们可以采用<code>continuation-passing style</code>（CPS）解决，想了解更多关于CPS，点击<a href="//en.wikipedia.org/wiki/Continuation-passing_style">这里</a>。</p>
+<p>通过这种方式，一个异步的函数可以调用一个回调函数（一般是作为最后一个参数传入），这样如果异步函数执行完后就会执行相应的回调函数。</p>
+<p>下面是一个查看谷歌IPv4地址的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> dns = <span class="built_in">require</span>(<span class="string">'dns'</span>);</div><div class="line">dns.resolve4(<span class="string">'www.google.com'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err, addresses)</span> </span>{</div><div class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'addresses: '</span> + <span class="built_in">JSON</span>.stringify(addresses));</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>我们写了个回调函数(那个匿名函数)作为<code>dns.resolve4</code>这个异步函数的第二个参数传入。一旦异步函数<code>dns.resolve4</code>执行完成了就会调用回调函数，以此来继续程序。</p>
+<h3 id="事件">事件</h3>
+<p>这个标准的回调函数范式对于在异步函数执行完成后需要提醒情况非常适用。然而，有一些情况是对于不同事件需要非同时的提醒：</p>
+<p>让我们看一个调用IRC客户端的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> irc = <span class="built_in">require</span>(<span class="string">'irc'</span>);</div><div class="line"><span class="keyword">var</span> client = <span class="keyword">new</span> irc.Client(<span class="string">'irc.freenode.net'</span>, <span class="string">'myIrcBot'</span>, {</div><div class="line">  channels: [<span class="string">'#sample-channel'</span>]</div><div class="line">});</div><div class="line">client.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span><span class="params">(message)</span> </span>{</div><div class="line">  <span class="built_in">console</span>.error(<span class="string">'error: '</span>, message);</div><div class="line">});</div><div class="line">client.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'connected to the irc server'</span>);</div><div class="line">});</div><div class="line">client.on(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(from, to, message)</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log(from + <span class="string">' =&gt; '</span> + to + <span class="string">': '</span> + message);</div><div class="line">});</div><div class="line">client.on(<span class="string">'pm'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(from, message)</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log(from + <span class="string">' =&gt; ME: '</span> + message);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>在上面的例子，我们监听不同的事件：</p>
+<blockquote>
+<ul>
+<li><code>connect</code>事件，当客户端和IRC服务端连接成功时候触发。</li>
+<li><code>error</code>事件，当发生错误时触发。</li>
+<li>当信息来临时触发<code>message</code>和<code>pm</code>事件。</li>
+</ul>
+</blockquote>
+<p>上面提到的事件让使用<code>EventEmitter</code>模式更加理想了。</p>
+<p><code>EventEmitter</code>模式实现了用户可以订阅他们喜欢的事件。这种模式可能你在浏览器那已经很熟悉了，经常用于绑定DOM事件。</p>
+<p>Node的核心里有一个<code>EventEmitter</code>类，让我们创造自己的<code>EventEmitter</code>对象。现在我们创建一个继承<code>EventEmitter</code>的<code>MemoryWatcher</code>类，再绑定两个事件：</p>
+<ul>
+<li>定期的<code>data</code>事件，表示内存使用量</li>
+<li><code>error</code>事件，防止内存使用超出限制</li>
+</ul>
+<p><code>MemoryWatcher</code>类如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</div><div class="line"><span class="keyword">var</span> util = <span class="built_in">require</span>(<span class="string">'util'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">MemoryWatcher</span><span class="params">(opts)</span> </span>{</div><div class="line">  <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> MemoryWatcher)) {</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MemoryWatcher();</div><div class="line">  }</div><div class="line">  opts = opts || {</div><div class="line">    frequency: <span class="number">30000</span> <span class="comment">// 30 seconds</span></div><div class="line">  };</div><div class="line">  EventEmitter.call(<span class="keyword">this</span>);</div><div class="line">  <span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line">  setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> bytes = process.memoryUsage().rss;</div><div class="line">    <span class="keyword">if</span> (opts.maxBytes && bytes &gt; opts.maxBytes) {</div><div class="line">      that.emit(<span class="string">'error'</span>, <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Memory exceeded '</span> + opts.maxBytes + <span class="string">' bytes'</span>));</div><div class="line">    }<span class="keyword">else</span> {</div><div class="line">      that.emit(<span class="string">'data'</span>, bytes);</div><div class="line">    }</div><div class="line">  }, opts.frequency);</div><div class="line">}</div><div class="line">util.inherits(MemoryWatcher, EventEmitter);</div></pre></td></tr></table></figure>
+
+<p>使用非常简单：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mem = <span class="keyword">new</span> MemoryWatcher({</div><div class="line">  maxBytes: <span class="number">12455936</span>,</div><div class="line">  frequency: <span class="number">5000</span></div><div class="line">});</div><div class="line">mem.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span><span class="params">(bytes)</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log(bytes);</div><div class="line">});</div><div class="line">mem.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span><span class="params">(err)</span> </span>{</div><div class="line">  <span class="keyword">throw</span> err;</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>一个更简单的创造<code>EventEmitter</code>对象方式是创建一个<code>EventEmitter</code>的新对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</div><div class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> EventEmitter();</div><div class="line">setInterval(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">  <span class="built_in">console</span>.log(process.memoryUsage().rss);</div><div class="line">}, <span class="number">30000</span>);</div></pre></td></tr></table></figure>
+
+<h3 id="数据流">数据流</h3>
+<p>流是异步地操纵数据流的一个抽象的接口，它们和Unix的管道命令很相似，可以分为五类：可读、可写、转换、双向和经典。</p>
+<p>和Unix管道命令一样，Node数据流也实现了<code>.pipe()</code>接口。数据流最棒的地方是你不需要将所有数据缓存到内存中，它们就可以很好的结合在一起。</p>
+<p>为了更好的理解数据流是如何工作的，我们将创建一个可以读取数据的应用，用AES-256算法加密数据，用gzip压缩数据。所有都是使用数据流的，这意味着每读一块数据我们都将它加密和压缩：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> zlib = <span class="built_in">require</span>(<span class="string">'zlib'</span>);</div><div class="line"><span class="keyword">var</span> password = <span class="keyword">new</span> Buffer(process.env.PASS || <span class="string">'password'</span>);</div><div class="line"><span class="keyword">var</span> encryptStream = crypto.createCipher(<span class="string">'aes-256-cbc'</span>, password);</div><div class="line"><span class="keyword">var</span> gzip = zlib.createGzip();</div><div class="line"><span class="keyword">var</span> readStream = fs.createReadStream(filename); <span class="comment">// current file</span></div><div class="line"><span class="keyword">var</span> writeStream = fs.createWriteStream(dirname + <span class="string">'/out.gz'</span>);</div><div class="line">readStream <span class="comment">// reads current file</span></div><div class="line">  .pipe(encryptStream) <span class="comment">// encrypts</span></div><div class="line">  .pipe(gzip) <span class="comment">// compresses</span></div><div class="line">  .pipe(writeStream) <span class="comment">// writes to out file</span></div><div class="line">  .on(<span class="string">'finish'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">    <span class="comment">// all done</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'done'</span>);</div><div class="line">  });</div></pre></td></tr></table></figure>
+
+<p>在这里我们使用可读流，将它导入到加密流，再导入到gzip压缩流，最后导入到输出流（将内容显示到屏幕上）。加密流和压缩流属于转换流，它表示将输入数据以某种方式计算处理后输出数据。</p>
+<p>应用运行后会生成一个<code>out.gz</code>的文件。现在我们来解密这个文件，并将内容输出到控制台：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</div><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">var</span> zlib = <span class="built_in">require</span>(<span class="string">'zlib'</span>);</div><div class="line"><span class="keyword">var</span> password = <span class="keyword">new</span> Buffer(process.env.PASS || <span class="string">'password'</span>);</div><div class="line"><span class="keyword">var</span> decryptStream = crypto.createDecipher(<span class="string">'aes-256-cbc'</span>, password);</div><div class="line"><span class="keyword">var</span> gzip = zlib.createGunzip();</div><div class="line"><span class="keyword">var</span> readStream = fs.createReadStream(__dirname + <span class="string">'/out.gz'</span>);</div><div class="line">readStream <span class="comment">// reads current file</span></div><div class="line">  .pipe(gzip) <span class="comment">// uncompresses</span></div><div class="line">  .pipe(decryptStream) <span class="comment">// decrypts</span></div><div class="line">  .pipe(process.stdout) <span class="comment">// writes to terminal</span></div><div class="line">  .on(<span class="string">'finish'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>{</div><div class="line">    <span class="comment">// finished</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'done'</span>);</div><div class="line">  });</div></pre></td></tr></table></figure>
+
+<h3 id="资源-2">资源</h3>
+<p>想了解更多关于Node基础，可以访问<a href="//webapplog.com/node-js-fundamentals-a-concise-overview-of-the-main-concepts/">这里</a>。更深入的了解数据流，请点击<a href="//github.com/substack/stream-handbook">数据流手册</a>。</p>
+<h2 id="错误处理">错误处理</h2>
+<p>错误处理是Node最重要的主题之一。如果忽略或者处理不当，你的整个应用将崩溃或处于不一致的状态。</p>
+<h3 id="Error-first回调函数">Error-first回调函数</h3>
+<p><code>error-first</code>回调函数是Node回调函数的一个标准协议，它起源于Node核心，后来被用户接受同时成为今天的标准。这是个很简单的规定，只有一条规则：回调函数的第一个参数必须是<code>error</code>对象。</p>
+<p>这就意味着可能出现两种场景：</p>
+<ul>
+<li>如果error参数是空，则操作成功。</li>
+<li>如果error参数不为空，则报错并需要你的处理</li>
+</ul>
+<p>让我们看一下我们是如何用Node读取文件内容的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fs.readFile(<span class="string">'/foo.txt'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(err, data)</span> </span>{</div><div class="line">  <span class="comment">// ...</span></div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p><code>fs.readFile</code>的回调函数有两个参数：error对象和文件内容。</p>
+<p>现在我们来实现一个相似的函数，使得可以读取多个文件的数据，通过一个数组传递参数。特征和之前的一样，只不过把单一文件路径参数改成一个数组：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">readFiles(filesArray, callback);</div></pre></td></tr></table></figure>
+
+<p>我们尊重<code>error-first</code>模式不会在<code>readFiles</code>函数里面处理错误，不过会将这任务转交给回调函数。<code>readFiles</code>函数会遍历文件路径数组，并读取数据。如果遇到错误，它将调用回调函数，有且只调用一次。当完成读取数组里最后一个文件的内容时，将调用回调函数并将<code>null</code>作为第一个参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFiles</span><span class="params">(files, callback)</span> </span>{</div><div class="line">  <span class="keyword">var</span> filesLeft = files.length;</div><div class="line">  <span class="keyword">var</span> contents = {};</div><div class="line">  <span class="keyword">var</span> error = <span class="literal">null</span>;</div><div class="line">  <span class="keyword">var</span> processContent = <span class="function"><span class="keyword">function</span><span class="params">(filePath)</span> </span>{</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(err, data)</span> </span>{</div><div class="line">      <span class="comment">// an error was previously encountered and the callback was invoked</span></div><div class="line">      <span class="keyword">if</span> (error !== <span class="literal">null</span>) { <span class="keyword">return</span>; }</div><div class="line">      <span class="comment">// an error happen while trying to read the file, so invoke the callback</span></div><div class="line">      <span class="keyword">if</span> (err) {</div><div class="line">        error = err;</div><div class="line">        <span class="keyword">return</span> callback(err);</div><div class="line">      }</div><div class="line">      contents[filePath] = data;</div><div class="line">      <span class="comment">// after the last file read was executed, invoke the callback</span></div><div class="line">      <span class="keyword">if</span> (!--filesLeft) {</div><div class="line">        callback(<span class="literal">null</span>, contents);</div><div class="line">      }</div><div class="line">    };</div><div class="line">  };</div><div class="line">  files.forEach(<span class="function"><span class="keyword">function</span><span class="params">(filePath)</span> </span>{</div><div class="line">    fs.readFile(filePath, processContent(filePath));</div><div class="line">  });</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<h3 id="EventEmitter错误">EventEmitter错误</h3>
+<p>我们要小心处理<code>EventEmitter</code>（数据流也一样），因为如果有未处理的错误事件将导致我们的应用崩溃。这是最简单的例子，由我们自己触发错误：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>).EventEmitter;</div><div class="line"><span class="keyword">var</span> emitter = <span class="keyword">new</span> EventEmitter();</div><div class="line">emitter.emit(<span class="string">'error'</span>, <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'something bad happened'</span>));</div></pre></td></tr></table></figure>
+
+<p>由你的应用决定，可以是个严重的错误（难以发现）或不会使你的应用崩溃的错误（如失败时发送一个信息）。无论如何都要绑定一个<code>error</code>事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">emitter.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span><span class="params">(err)</span> </span>{</div><div class="line">  <span class="built_in">console</span>.error(<span class="string">'something went wrong with the ee:'</span> + err.message);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<h3 id="用verror模块传递更具描述性的错误">用verror模块传递更具描述性的错误</h3>
+<p>有很多种情况是需要我们将错误指派给回调函数。实际上，我们上面写<code>readFiles</code>函数的时候做过这样的事。可是在读取文件的时候发现错误我们只要指派给回调函数吗？</p>
+<p>让我们试着读取一个不存在的文件，看看会发生什么：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">readFiles([<span class="string">'non-existing-file'</span>], <span class="function"><span class="keyword">function</span><span class="params">(err, contents)</span> </span>{</div><div class="line">  <span class="keyword">if</span> (err) { <span class="keyword">throw</span> err; }</div><div class="line">  <span class="built_in">console</span>.log(contents);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>上面的例子输出如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ node <span class="built_in">read</span>Files.js</div><div class="line">/Users/alexandruvladutu/www/airpair-article/examples/<span class="built_in">read</span>Files.js:<span class="number">34</span></div><div class="line">  <span class="keyword">if</span> (err) { throw err; }</div><div class="line">                    ^</div><div class="line">Error: ENOENT, open <span class="string">'/Users/alexandruvladutu/www/airpair-article/examples/non-existing-file'</span></div></pre></td></tr></table></figure>
+
+<p>这错误提示并不是那么理想，因为在现实当中的情况可能是一个函数调用另一个函数再调用原来的函数。例如，你或许有个函数叫<code>readMarkdownFiles</code>，它会调用<code>readFiles</code>去读取markdown文件。</p>
+<p>上面输出的错误追踪并不是那么的有用，所以你还要深度的挖掘错误的来源。幸运的是我们可以通过整合<code>verror</code>模块到应用中来解决这样的问题。</p>
+<p>使用方法就是引入<code>verror</code>模块，在调用回调函数时用<code>verror</code>对象包住我们的<code>error</code>对象并提供更多的错误信息：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> verror = <span class="built_in">require</span>(<span class="string">'verror'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFiles</span><span class="params">(files, callback)</span> </span>{</div><div class="line">  ...</div><div class="line">  <span class="keyword">return</span> callback(<span class="keyword">new</span> VError(err, <span class="string">'failed to read file %s'</span>, filePath));</div><div class="line">  ...</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>让我们看看输出结果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ node <span class="built_in">read</span>Files-verror.js</div><div class="line">/Users/alexandruvladutu/www/airpair-article/examples/<span class="built_in">read</span>Files-verror.js:<span class="number">35</span></div><div class="line">  <span class="keyword">if</span> (err) { throw err; }</div><div class="line">                    ^</div><div class="line">VError: failed to <span class="built_in">read</span> file /Users/alexandruvladutu/www/airpair-article/examples/non-existing-file: ENOENT, open <span class="string">'/Users/alexandruvladutu/www/airpair-article/examples/non-existing-file'</span></div><div class="line">  at /Users/alexandruvladutu/www/airpair-article/examples/<span class="built_in">read</span>Files-verror.js:<span class="number">17</span>:<span class="number">25</span></div><div class="line">  at fs.js:<span class="number">207</span>:<span class="number">20</span></div><div class="line">  at Object.oncomplete (fs.js:<span class="number">107</span>:<span class="number">15</span>)</div></pre></td></tr></table></figure>
+
+<p>现在我们知道在读取文件上出现错误，并且知道错误来自<code>readFiles</code>函数。</p>
+<p>这是一个简单的例子，但展示了<code>verror</code>的强大。在我们的产品中，这个模块是非常有用的，因为代码库可能非常大，错误源可能比我们的例子藏得更深。</p>
+<h3 id="资源-3">资源</h3>
+<p>想了解更多，可以访问<a href="//www.joyent.com/developers/node/design/errors">这篇文章</a>。</p>
+<h2 id="使用node-inspector调试Node应用">使用node-inspector调试Node应用</h2>
+<p>很多小的错误我们可以使用<code>console.log</code>去追踪，但是更复杂的错误我们可以使用<a href="//github.com/node-inspector/node-inspector">node-inspector</a>，它有很多很吸引人的特性，但最重要的还是：</p>
+<ul>
+<li>它是基于Blink开发者工具的，所以它用起来像前端开发工具。</li>
+<li>它可以设置断点。</li>
+<li>我们能step over、step in、step out和resume(继续)。</li>
+<li>我们可以检测作用域、变量、对象属性。</li>
+<li>除了检测，我们还能修改变量、对象属性。</li>
+</ul>
+<p>通过npm安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g node-inspector</div></pre></td></tr></table></figure>
+
+<p>让我们来写个最简单的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</div><div class="line"><span class="keyword">var</span> port = process.env.PORT || <span class="number">1337</span>;</div><div class="line">http.createServer(<span class="function"><span class="keyword">function</span><span class="params">(req, res)</span> </span>{</div><div class="line">  res.writeHead(<span class="number">200</span>, { <span class="string">'Content-Type'</span>: <span class="string">'text/html'</span> });</div><div class="line">  res.end(<span class="keyword">new</span> <span class="built_in">Date</span>() + <span class="string">'\n'</span>);</div><div class="line">}).listen(port);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'Server running on port %s'</span>, port);</div></pre></td></tr></table></figure>
+
+<p>为了调试我们的例子，我们要输入下面这行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># basically `node-debug` instead of `node`</span></div><div class="line">$ node-debug example.js</div></pre></td></tr></table></figure>
+
+<p>这样不仅让我们的应用跑起来，而且还会在Chrome里面打开node-inspector面板。让我们在请求上设置一个断点（通过点击边缘上的数字）。现在让我们打开另一个窗口，访问<a href="//localhost:1337">http://localhost:1337</a>。浏览器会出现加载的状态，但打开node-inspector面板看看：</p>
+<p><img src="/img/node/img-2.jpg" alt="node-inspector"></p>
+<p>如果你打开console选卡，你能检测<code>request</code>和<code>response</code>对象，还能修改他们等等。这只是node-inspector入门的一个很简单的例子，但在实际运用当中通过这样的调试方式可以解决更复杂的错误问题。</p>
+<h3 id="资源-4">资源</h3>
+<p>想了解更多关于调试的东西，可以访问<a href="//blog.nodeknockout.com/post/34843655876/debugging-with-node-inspector">这篇文章</a>。</p>
+<h2 id="用Express和Socket-IO创建一个实时应用">用Express和Socket.IO创建一个实时应用</h2>
+<p><code>Express</code>是Node最流行的框架，且<code>Socket.IO</code>是客户端和服务端双向实时通信的框架。所以我们要用上面两个框架创建一个简单的像素跟踪应用，具有显示板并且可以实时显示访问者。</p>
+<p>除了<code>Express</code>和<code>Socket.IO</code>模块，我们还需要安装<code>emptygif</code>模块。当用户访问<a href="//localhost:1337/tpx.gif">http://localhost:1337/tpx.gif</a>，正在访问zh<a href="//localhost:1337/">首页</a>的用户会收到一条信息，这条信息与客户端相关，包括IP地址和浏览器引擎。</p>
+<p>下面是<code>server.js</code>文件的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> emptygif = <span class="built_in">require</span>(<span class="string">'emptygif'</span>);</div><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"><span class="keyword">var</span> server = <span class="built_in">require</span>(<span class="string">'http'</span>).createServer(app);</div><div class="line"><span class="keyword">var</span> io = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(server);</div><div class="line">app.get(<span class="string">'/tpx.gif'</span>, <span class="function"><span class="keyword">function</span><span class="params">(req, res, next)</span> </span>{</div><div class="line">  io.emit(<span class="string">'visit'</span>, {</div><div class="line">    ip: req.ip,</div><div class="line">    ua: req.headers[<span class="string">'user-agent'</span>]</div><div class="line">  });</div><div class="line">  emptygif.sendEmptyGif(req, res, {</div><div class="line">    <span class="string">'Content-Type'</span>: <span class="string">'image/gif'</span>,</div><div class="line">    <span class="string">'Content-Length'</span>: emptygif.emptyGifBufferLength,</div><div class="line">    <span class="string">'Cache-Control'</span>: <span class="string">'public, max-age=0'</span> <span class="comment">// or specify expiry to make sure it will call everytime</span></div><div class="line">  });</div><div class="line">});</div><div class="line">app.use(express.static(__dirname + <span class="string">'/public'</span>));</div><div class="line">server.listen(<span class="number">1337</span>);</div></pre></td></tr></table></figure>
+
+<p>在前端我们只要监听由服务端发出的<code>visit</code>事件，修改相应的UI：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="doctype">&lt;!DOCTYPE HTML&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">lang</span>=<span class="value">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">title</span>&gt;</span>Realtime pixel tracking dashboard<span class="tag">&lt;/<span class="title">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css"></span></div><div class="line">    <span class="class">.visit</span> <span class="rules">{</span></div><div class="line">      <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">5px</span> <span class="number">0</span></span></span>;</div><div class="line">      <span class="rule"><span class="attribute">border-bottom</span>:<span class="value"> <span class="number">1px</span> dotted <span class="hexcolor">#CCC</span></span></span>;</div><div class="line">      <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">5px</span> <span class="number">0</span></span></span>;</div><div class="line">    <span class="rule">}</span></div><div class="line">    <span class="class">.ip</span> <span class="rules">{</span></div><div class="line">      <span class="rule"><span class="attribute">margin</span>:<span class="value"> <span class="number">0</span> <span class="number">10px</span></span></span>;</div><div class="line">      <span class="rule"><span class="attribute">border-left</span>:<span class="value"> <span class="number">1px</span> dotted <span class="hexcolor">#CCC</span></span></span>;</div><div class="line">      <span class="rule"><span class="attribute">border-right</span>:<span class="value"> <span class="number">1px</span> dotted <span class="hexcolor">#CCC</span></span></span>;</div><div class="line">      <span class="rule"><span class="attribute">padding</span>:<span class="value"> <span class="number">0</span> <span class="number">5px</span></span></span>;</div><div class="line">    <span class="rule">}</span></div><div class="line">  <span class="tag">&lt;/<span class="title">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Realtime pixel tracking dashboard<span class="tag">&lt;/<span class="title">h1</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"visits"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"https://code.jquery.com/jquery-1.10.2.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.1/moment.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/socket.io/socket.io.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  $(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>{</div><div class="line">    <span class="keyword">var</span> socket = io();</div><div class="line">    <span class="keyword">var</span> containerEl = $(<span class="string">'.visits'</span>);</div><div class="line">    socket.on(<span class="string">'visit'</span>, <span class="function"><span class="keyword">function</span><span class="params">(visit)</span> </span>{</div><div class="line">      <span class="keyword">var</span> newItem = <span class="string">'&lt;div class="visit"&gt;'</span>;</div><div class="line">          newItem += <span class="string">'&lt;span class="date"&gt;'</span> + moment().format(<span class="string">'MMMM Do YYYY, HH:mm:ss'</span>) + <span class="string">'&lt;/span&gt;'</span>;</div><div class="line">          newItem += <span class="string">'&lt;span class="ip"&gt;'</span> + visit.ip + <span class="string">'&lt;/span&gt;'</span>;</div><div class="line">          newItem += <span class="string">'&lt;span class="ua"&gt;'</span> + visit.ua + <span class="string">'&lt;/span&gt;&lt;/div&gt;'</span>;</div><div class="line">          containerEl.append(newItem);</div><div class="line">    });</div><div class="line">  });</div><div class="line">  <span class="tag">&lt;/<span class="title">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">html</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>现在让我们启动应用程序，打开显示板，用不同的浏览器打开我们的应用，显示如下：</p>
+<p><img src="/img/node/img-2.jpg" alt="dashboard"></p>
+<h3 id="资源-5">资源</h3>
+<p>想了解更多关于Express和Socket.IO，可以点击<a href="//www.digitalocean.com/community/tutorials/how-to-install-express-a-node-js-framework-and-set-up-socket-io-on-a-vps">这个教程</a>。</p>
+<h2 id="总结">总结</h2>
+<p>Node并不是万能的，但是希望你能在正确的情况下使用。简而言之，对于I/O等待和高并发的应用，Node是一个好的选择。</p>
+<p>npm注册量每天都在增长，这说明将会有越来越多的Node模块可以使用。我们不仅学习了如何安装Node，也了解了Node的核心，例如回调函数、事件和数据流。在文章的末尾我们解决了一些实际的问题，例如错误处理、调试和创建了一个实例。</p>
+<p>如果你还怀疑Node是否足够成熟，你要知道一些大公司像雅虎、沃尔玛或PayPal正在用它。如果你还有什么问题可以提出来。</p>
+<p>原文链接：</p>
+<blockquote>
+<ul>
+<li><a href="http://www.airpair.com/javascript/node-js-tutorial/" target="_blank" rel="external">http://www.airpair.com/javascript/node-js-tutorial/</a></li>
+</ul>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Node-js/">Node.js</a><a href="/tags/Javascript/">Javascript</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2014/10/29/NodeJs教程/" data-title="NodeJs教程 | 特首的前端日志" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/01/26/Swift学习笔记/" title="Swift学习笔记">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Swift学习笔记</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/09/29/Javascript类型理解与类型判断/"  title="Javascript类型理解与类型判断">
+ <strong>NEXT:</strong><br/> 
+ <span>Javascript类型理解与类型判断
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-number">1.</span> <span class="toc-text">介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#是什么让Node比Rails及其他语言更加流行？"><span class="toc-number">1.1.</span> <span class="toc-text">是什么让Node比Rails及其他语言更加流行？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用场景"><span class="toc-number">1.2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm，官方Node_package包管理工具"><span class="toc-number">1.3.</span> <span class="toc-text">npm，官方Node package包管理工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源"><span class="toc-number">1.4.</span> <span class="toc-text">资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Node-js和NPM"><span class="toc-number">2.</span> <span class="toc-text">安装Node.js和NPM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#资源-1"><span class="toc-number">2.1.</span> <span class="toc-text">资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Node基础"><span class="toc-number">3.</span> <span class="toc-text">Node基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块"><span class="toc-number">3.1.</span> <span class="toc-text">模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#回调函数"><span class="toc-number">3.2.</span> <span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件"><span class="toc-number">3.3.</span> <span class="toc-text">事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据流"><span class="toc-number">3.4.</span> <span class="toc-text">数据流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源-2"><span class="toc-number">3.5.</span> <span class="toc-text">资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#错误处理"><span class="toc-number">4.</span> <span class="toc-text">错误处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Error-first回调函数"><span class="toc-number">4.1.</span> <span class="toc-text">Error-first回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EventEmitter错误"><span class="toc-number">4.2.</span> <span class="toc-text">EventEmitter错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用verror模块传递更具描述性的错误"><span class="toc-number">4.3.</span> <span class="toc-text">用verror模块传递更具描述性的错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#资源-3"><span class="toc-number">4.4.</span> <span class="toc-text">资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用node-inspector调试Node应用"><span class="toc-number">5.</span> <span class="toc-text">使用node-inspector调试Node应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#资源-4"><span class="toc-number">5.1.</span> <span class="toc-text">资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用Express和Socket-IO创建一个实时应用"><span class="toc-number">6.</span> <span class="toc-text">用Express和Socket.IO创建一个实时应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#资源-5"><span class="toc-number">6.1.</span> <span class="toc-text">资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Gulp/" title="Gulp">Gulp<sup>1</sup></a></li>
+		
+			<li><a href="/tags/IOS/" title="IOS">IOS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Javascript/" title="Javascript">Javascript<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Jason <br/>
+			My blog will update monthly</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1164450580" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/markpop" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="特首">特首</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"markpop"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-54795545-2', 'auto');  
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>

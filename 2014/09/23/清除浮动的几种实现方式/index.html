@@ -1,0 +1,422 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>清除浮动的几种实现方式 | 特首的前端日志</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="特首">
+    
+    <meta name="description" content="前言
+float: left会使元素脱离文档流，不占据文档流的空间。如果子元素使用float: left，父元素不做相关的处理的话，父元素就没法包裹住子元素。之前习惯在父元素上加overflow: hidden来处理这个问题，可是会有局限性，当子元素超出父元素的话，超出部分就会被隐藏，所以说清除浮动">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="特首的前端日志" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/icon.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/icon.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/rocket.jpg" alt="特首的前端日志" title="特首的前端日志"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="特首的前端日志">特首的前端日志</a></h1>
+				<h2 class="blog-motto">我不是大神，可我是要成为大神的男人</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/09/23/清除浮动的几种实现方式/" title="清除浮动的几种实现方式" itemprop="url">清除浮动的几种实现方式</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="特首">特首</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-09-23T13:31:24.000Z" itemprop="datePublished">9月 23 2014</time>
+    更新日期:<time datetime="2015-01-26T14:50:24.000Z" itemprop="dateModified">1月 26 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<h2 id="前言">前言</h2>
+<p><code>float: left</code>会使元素脱离文档流，不占据文档流的空间。如果子元素使用<code>float: left</code>，父元素不做相关的处理的话，父元素就没法包裹住子元素。之前习惯在父元素上加<code>overflow: hidden</code>来处理这个问题，可是会有局限性，当子元素超出父元素的话，超出部分就会被隐藏，所以说清除浮动这谭水很深。</p>
+<h2 id="丑陋的实现方式">丑陋的实现方式</h2>
+<p><strong>html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"parent"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">br</span> <span class="attribute">class</span>=<span class="value">"cb"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><strong>css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class">.child</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">_display</span>:<span class="value"> inline</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.cb</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>最丑陋的实现方式就是在子元素后再加一个用于清除浮动的<code>br</code>元素，写个专门清除浮动的<code>.cb</code>类加在它上面。上面的例子也可使用<code>clear: left</code>清除左浮动，为了方便才使用<code>clear: both</code>，最后不要忘了加上<code>_display: inline</code>兼容IE6。</p>
+<h2 id="父亲元素浮动的实现方式">父亲元素浮动的实现方式</h2>
+<p><strong>html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"parent"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><strong>css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class">.parent</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100%</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.child</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>只要父元素也跟着浮动的话，也可以达到效果。可是这样会影响后面元素的定位，而且有些时候父元素是定位死的，无法变成浮动。</p>
+<h2 id="overflow实现方式">overflow实现方式</h2>
+<p><strong>html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"parent"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><strong>css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class">.parent</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.child</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>在父元素上使用<code>overflow: hidden</code>可以达到清除浮动的效果，也可以是<code>overflow: auto</code>。可是通过overflow实现的清除浮动都有一个缺点，当子元素超出了父元素，父元素使用<code>overflow: hidden</code>的话，子元素超出的部分会被隐藏；使用<code>overflow: auto</code>的话，父元素上会出现滚动条，最后也别忘加上<code>zoom: 1</code>触发IE的hasLayout。</p>
+<h2 id="display:inline-block的实现方式">display:inline-block的实现方式</h2>
+<p><strong>html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"parent"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><strong>css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class">.parent</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">0px</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.child</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> inline-block</span></span>;</div><div class="line">  <span class="rule">*<span class="attribute">display</span>:<span class="value"> inline</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>其实换个角度想想也可以不使用float来实现效果，那就是用<code>display: inline-block</code>，使得块级元素具有行内元素的特性。IE8以下不支持这个属性，但是有解决的方案就是加上<code>*display: inline; zoom: 1;</code>。为什么要加<code>font-size: 0px</code>?消除现代浏览器上出现的间距，但是在子元素上要重置<code>font-size</code>，除此之外还可以改变html代码缩进，去掉换行，写成一行。</p>
+<h2 id="用于现代浏览器的实现方式">用于现代浏览器的实现方式</h2>
+<p><strong>html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"parent"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><strong>css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="class">.parent</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> -webkit-flex</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> -ms-flex</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> flex</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">-webkit-flex-flow</span>:<span class="value"> row wrap</span></span>;</div><div class="line">      <span class="rule"><span class="attribute">-ms-flex-flow</span>:<span class="value"> row wrap</span></span>;</div><div class="line">          <span class="rule"><span class="attribute">flex-flow</span>:<span class="value"> row wrap</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.child</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>这种用于现代浏览器的实现方式更加灵活了，可是不支持IE10以下的浏览器，<code>flex-flow</code>的两个值分别表示<code>flex-direction</code>（横向还是纵向）、<code>flex-wrap</code>（是否换行），上面的例子是横向多行排列。除此之外还很支持很多属性，想了解更多可以看<a href="//dev.opera.com/articles/flexbox-basics/">这篇文章</a>。</p>
+<h2 id=":after伪元素的实现方式">:after伪元素的实现方式</h2>
+<p><strong>html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"parent"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><strong>css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class">.parent</span><span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.child</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>或者</p>
+<p><strong>css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class">.parent</span><span class="pseudo">:before</span>,</div><div class="line"><span class="class">.parent</span><span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">"."</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">0</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.parent</span><span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.parent</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.child</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>这种方式原理利用<code>:after</code>伪元素，实现在父元素内容后面清除浮动的效果。</p>
+<h2 id="最佳实现方式">最佳实现方式</h2>
+<p><strong>html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"parent"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"child"</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p><strong>css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class">.parent</span><span class="pseudo">:before</span>,</div><div class="line"><span class="class">.parent</span><span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.parent</span><span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.parent</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.child</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">50px</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>这个是现在最广泛被接受做法，作者是<a href="//nicolasgallagher.com/">Nicolas Gallagher</a>，是前一种方式的改进版。</p>
+<h2 id="网格布局">网格布局</h2>
+<p>利用清除浮动，我们可以自己开发一个简易的网格布局。</p>
+<p><strong>css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">*,</div><div class="line">*<span class="pseudo">:before</span>,</div><div class="line">*<span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">-webkit-box-sizing</span>:<span class="value"> border-box</span></span>;</div><div class="line">     <span class="rule"><span class="attribute">-moz-box-sizing</span>:<span class="value"> border-box</span></span>;</div><div class="line">          <span class="rule"><span class="attribute">box-sizing</span>:<span class="value"> border-box</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.row</span><span class="pseudo">:before</span>,</div><div class="line"><span class="class">.row</span><span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">""</span></span></span>;</div><div class="line">  <span class="rule"><span class="attribute">display</span>:<span class="value"> table</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.row</span><span class="pseudo">:after</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">clear</span>:<span class="value"> both</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.row</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-1</span>,</div><div class="line"><span class="class">.col-2</span>,</div><div class="line"><span class="class">.col-3</span>,</div><div class="line"><span class="class">.col-4</span>,</div><div class="line"><span class="class">.col-5</span>,</div><div class="line"><span class="class">.col-6</span>,</div><div class="line"><span class="class">.col-7</span>,</div><div class="line"><span class="class">.col-8</span>,</div><div class="line"><span class="class">.col-9</span>,</div><div class="line"><span class="class">.col-10</span>,</div><div class="line"><span class="class">.col-11</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">float</span>:<span class="value"> left</span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-1</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">8.333333333333332%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-2</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">16.666666666666664%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-3</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">25%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-4</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">33.33333333333333%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-5</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">41.66666666666667%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-6</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">50%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-7</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">58.333333333333336%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-8</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">66.66666666666666%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-9</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">75%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-10</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">83.33333333333334%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-11</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">91.66666666666666%</span></span></span>;</div><div class="line"><span class="rule">}</span></div><div class="line"><span class="class">.col-12</span> <span class="rules">{</span></div><div class="line">  <span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100%</span></span></span>;</div><div class="line"><span class="rule">}</span></div></pre></td></tr></table></figure>
+
+<p>使用方法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"row"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-10"</span>&gt;</span></div><div class="line">    ...</div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"col-2"</span>&gt;</span></div><div class="line">    ...</div><div class="line">  <span class="tag">&lt;/<span class="title">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="title">div</span>&gt;</span></div></pre></td></tr></table></figure>
+
+<p>首先利用<code>box-sizing: border-box</code>,将盒子模型设置成IE盒子模型，然后子元素都<code>float: left</code>，按照百分比去设置宽度，父元素使用清除浮动。使用的时候注意<code>col-X</code>数字加起来要等于12就可以了。</p>
+<blockquote>
+<p> 参考链接：</p>
+<ul>
+<li><a href="http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best" target="_blank" rel="external">http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best</a></li>
+<li><a href="https://dev.opera.com/articles/flexbox-basics/" target="_blank" rel="external">https://dev.opera.com/articles/flexbox-basics/</a></li>
+<li><a href="http://www.cssmojo.com/latest_new_clearfix_so_far/" target="_blank" rel="external">http://www.cssmojo.com/latest_new_clearfix_so_far/</a></li>
+<li><a href="http://nicolasgallagher.com/micro-clearfix-hack/" target="_blank" rel="external">http://nicolasgallagher.com/micro-clearfix-hack/</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2009/04/float_clearing.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2009/04/float_clearing.html</a></li>
+</ul>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CSS/">CSS</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2014/09/23/清除浮动的几种实现方式/" data-title="清除浮动的几种实现方式 | 特首的前端日志" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/09/29/Javascript类型理解与类型判断/" title="Javascript类型理解与类型判断">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Javascript类型理解与类型判断</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/09/17/Gulp入门教程/"  title="Gulp入门教程">
+ <strong>NEXT:</strong><br/> 
+ <span>Gulp入门教程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#丑陋的实现方式"><span class="toc-number">2.</span> <span class="toc-text">丑陋的实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#父亲元素浮动的实现方式"><span class="toc-number">3.</span> <span class="toc-text">父亲元素浮动的实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#overflow实现方式"><span class="toc-number">4.</span> <span class="toc-text">overflow实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#display:inline-block的实现方式"><span class="toc-number">5.</span> <span class="toc-text">display:inline-block的实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用于现代浏览器的实现方式"><span class="toc-number">6.</span> <span class="toc-text">用于现代浏览器的实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#:after伪元素的实现方式"><span class="toc-number">7.</span> <span class="toc-text">:after伪元素的实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实现方式"><span class="toc-number">8.</span> <span class="toc-text">最佳实现方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网格布局"><span class="toc-number">9.</span> <span class="toc-text">网格布局</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/CSS/" title="CSS">CSS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Gulp/" title="Gulp">Gulp<sup>1</sup></a></li>
+		
+			<li><a href="/tags/IOS/" title="IOS">IOS<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Javascript/" title="Javascript">Javascript<sup>3</sup></a></li>
+		
+			<li><a href="/tags/Node-js/" title="Node.js">Node.js<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Jason <br/>
+			My blog will update monthly</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1164450580" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/markpop" target="_blank" title="github"></a>
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="特首">特首</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"markpop"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-54795545-2', 'auto');  
+ga('send', 'pageview');
+</script>
+
+
+  </body>
+</html>
